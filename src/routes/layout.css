@@ -1,2 +1,42 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
+
+/* Подключение шрифтов */
+@font-face {
+    font-family: "Bounded";
+    src: url("/fonts/Bounded.ttf") format("truetype");
+    font-weight: 200 900;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Manrope";
+    src: url("/fonts/Manrope.ttf") format("truetype");
+    font-weight: 200 900;
+    font-display: swap;
+}
+
+/* Переменные tailwind */
+@theme {
+    --font-bounded: "Bounded", sans-serif;
+    --font-manrope: "Manrope", sans-serif;
+
+    --color-white: #F3F1EF;
+    --color-primary: #F05A28;
+    --color-black: #202020;
+    --color-dark-gray: #2A2A2A;
+    --color-gray: #4A4A4A;
+}
+
+/* Глобальные стили */
+body {
+    @apply bg-white;
+}
+section{
+    @apply mb-21.5
+}
+.title-section{
+    @apply font-bounded font-bold text-[28px] leading-8 text-black uppercase mb-1;
+}
+.desc-section{
+    @apply font-bounded font-light text-xl leading-6 text-black uppercase mb-6.5;
+}
