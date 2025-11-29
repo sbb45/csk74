@@ -9,16 +9,16 @@
     $: cardClasses =
         type === "black"
             ? "bg-dark-gray text-white border-black border-2 rounded-xl"
-            : "text-black border-black border-2 rounded-xl";
+            : "bg-white text-gray border-black border-2 rounded-xl";
 </script>
 
-<div class="w-[330px] flex-shrink-0 snap-start rounded-xl border-2 border-black bg-white overflow-hidden">
+<div class={`w-[350px] flex-shrink-0 snap-start rounded-xl border-2 border-dark-gray overflow-hidden last:mr-2 ${cardClasses}`}>
     <div class="font-manrope py-5 px-3.5 flex flex-col gap-3">
         <div>
-            <p class="text-lg text-gray">{date}</p>
-            <h5 class="font-bold text-2xl text-black uppercase">{name}</h5>
+            <p class="text-lg">{date}</p>
+            <h5 class="font-bold text-2xl uppercase {type === 'black' ? 'text-white' : ''}">{name}</h5>
         </div>
-        <p class="text-sm leading-5 text-gray">{message}</p>
+        <p class="text-sm leading-5">{message}</p>
     </div>
     <div class="w-full h-66.5 overflow-hidden">
         <img src={image} alt="Фото объекта" class="w-full h-full object-cover">
