@@ -35,8 +35,8 @@ section{
     @apply mb-21.5
 }
 .title-section{
-    @apply font-bounded font-bold text-[28px] leading-8 text-black uppercase mb-1;
+    @apply font-bounded font-bold text-[28px] leading-8 text-black uppercase mb-1 md:text-[32px] md:leading-none md:mb-3;
 }
 .desc-section{
-    @apply font-bounded font-light text-xl leading-6 text-black uppercase mb-6.5;
+    @apply font-bounded font-light text-xl leading-6 text-black uppercase mb-6.5 md:text-[28px] md:leading-none;
 }

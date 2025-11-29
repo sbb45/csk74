@@ -27,29 +27,10 @@
 
     allImages.forEach((item, i) => (i % 2 === 0 ? leftImages : rightImages).push(item));
 
-    let leftCol: HTMLElement;
-    let rightCol: HTMLElement;
 
-    onMount(async () => {
-        const {gsap, ScrollTrigger} = await loadGSAP();
-        if(!gsap || !ScrollTrigger) return;
-
-        const opts = {
-            scrollTrigger: {
-                trigger: leftCol.parentElement,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true
-            }
-        };
-
-        gsap.fromTo(leftCol, { yPercent: 0 }, { yPercent: -20, ...opts });
-        gsap.fromTo(rightCol, { yPercent: 0 }, { yPercent: 20, ...opts });
-    });
 </script>
 
 <style>
-    /* fade-in / fade-out по краям секции */
     .mask-columns {
         mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
         -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
@@ -61,7 +42,7 @@
     <h3 class="desc-section mb-6.5 text-center">Которые мы реализовали</h3>
 
     <div class="grid grid-cols-2 gap-x-2.5 px-2 mask-columns">
-        <div class="flex flex-col gap-2" bind:this={leftCol}>
+        <div class="flex flex-col gap-2">
             {#each leftImages as img (img.id)}
                 <img
                         src={img.src}
@@ -71,7 +52,7 @@
             {/each}
         </div>
 
-        <div class="flex flex-col gap-2" bind:this={rightCol}>
+        <div class="flex flex-col gap-2">
             {#each rightImages as img (img.id)}
                 <img
                         src={img.src}

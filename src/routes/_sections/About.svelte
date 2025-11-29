@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { isLarge } from "$lib/stores/breakpoint";
+    import { derived } from "svelte/store";
     import Button from "$lib/components/ui/Button.svelte";
     import AboutCard from "$lib/components/cards/AboutCard.svelte";
     import coin from "$lib/assets/icons/about/coin.svg";
@@ -18,17 +20,40 @@
     const cards: Card[] = [
         {id: 1, title: "Цена по договору", desc: "Фиксируем стоимость в договоре. Никаких скрытых работ и неожиданных доплат.", icon: coin},
         {id: 2, title: "Честная смета", desc: "Сумма фиксируется до начала работ и остаётся неизменной.", icon: cardSecurity},
-        {id: 3, title: "Отчётность", desc: "Регулярные фото- и видеообновления, чтобы вы видели каждый этап стройки.", icon: page, type: "cut"},
+        {id: 3, title: "Отчётность", desc: "Регулярные фото- и видеообновления, чтобы вы видели каждый этап стройки.", icon: page},
         {id: 4, title: "Гарантия работ", desc: "Даём гарантию и остаёмся на связи после сдачи дома.", icon: security},
-        {id: 5, title: "Надёжные  материалы", desc: "Используем только проверенные и качественные материалы.", icon: angleToll, type: "black"},
+        {id: 5, title: "Надёжные  материалы", desc: "Используем только проверенные и качественные материалы.", icon: angleToll},
     ];
+
+    const desktopTypes: Record<number, Card["type"]> = {
+        2: "cut",
+        4: "black",
+        5: "black"
+    };
+
+    const mobileTypes: Record<number, Card["type"]> = {
+        3: "cut",
+        5: "black"
+    };
+
+    const responsiveCards = derived(isLarge, ($isLarge) =>
+        cards.map((card) => ({
+            ...card,
+            type: $isLarge
+                ? desktopTypes[card.id] ?? undefined
+                : mobileTypes[card.id] ?? undefined
+        }))
+    );
+
 </script>
 
 <section class="px-4">
     <h2 class="title-section">Наши сильные стороны</h2>
-    <h3 class="desc-section">Которые ценят клиенты</h3>
-    {#each cards as card (card.id)}
-        <AboutCard title={card.title} description={card.desc} icon={card.icon} type={card.type} />
-    {/each}
-    <Button text="Подробнее о нас" href="/" className="mt-7" />
+    <h3 class="desc-section md:pl-48">Которые ценят клиенты</h3>
+    <div class="block md:grid md:grid-cols-2 md:gap-4 md:items-end md:justify-end">
+        {#each $responsiveCards as card (card.id)}
+            <AboutCard title={card.title} description={card.desc} icon={card.icon} type={card.type} />
+        {/each}
+        <Button text="Подробнее о нас" href="/" className="mt-7 md:mt-0" />
+    </div>
 </section>

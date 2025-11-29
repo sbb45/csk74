@@ -13,7 +13,7 @@
 </script>
 
 <div
-        class={`w-full h-[184px] flex justify-between items-start flex-col py-4 px-4.5 mb-4 ${cardClasses}`}
+        class={`w-full h-[184px] flex justify-between items-start flex-col py-4 px-4.5 mb-4 md:mb-0 ${cardClasses}`}
         style={type === 'cut'
 		? `-webkit-mask-image:url('/assets/mask-about.svg'); mask-image:url('/assets/mask-about.svg'); mask-size:100% 100%; -webkit-mask-size:100% 100%; mask-repeat:no-repeat; -webkit-mask-repeat:no-repeat;`
 		: ''}
