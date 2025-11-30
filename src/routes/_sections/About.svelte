@@ -48,6 +48,7 @@
 </script>
 
 <section class="px-4 lg:px-8 xl:px-10 3xl:max-w-[2000px]!">
+    <div id="about"></div>
     <h2 class="title-section">Наши сильные стороны</h2>
     <h3 class="desc-section md:pl-48 lg:pl-58 xl:pl-110 2xl:pl-170">Которые ценят клиенты</h3>
     <div class="block md:grid md:grid-cols-2 md:gap-4 md:items-end md:justify-end
