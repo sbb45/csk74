@@ -25,6 +25,8 @@
     --color-black: #202020;
     --color-dark-gray: #2A2A2A;
     --color-gray: #4A4A4A;
+
+    --breakpoint-3xl: 2300px;
 }
 
 /* Глобальные стили */
@@ -32,11 +34,11 @@ body {
     @apply bg-white;
 }
 section{
-    @apply mb-21.5
+    @apply mb-21.5 lg:mb-30 2xl:max-w-[1760px] 2xl:mx-auto 2xl:mb-35;
 }
 .title-section{
-    @apply font-bounded font-bold text-[28px] leading-8 text-black uppercase mb-1 md:text-[32px] md:leading-none md:mb-3;
+    @apply font-bounded font-bold text-[28px] leading-8 text-black uppercase mb-1 md:text-[32px] md:leading-none md:mb-3 lg:text-5xl lg:mb-2 xl:text-[52px] 2xl:text-[64px];
 }
 .desc-section{
-    @apply font-bounded font-light text-xl leading-6 text-black uppercase mb-6.5 md:text-[28px] md:leading-none;
+    @apply font-bounded font-light text-xl leading-6 text-black uppercase mb-6.5 md:text-[28px] md:leading-none lg:text-[36px] 2xl:text-[40px];
 }

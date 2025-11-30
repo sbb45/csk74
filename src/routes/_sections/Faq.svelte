@@ -1,5 +1,4 @@
 <script lang="ts">
-    import img1 from "$lib/images/portfolio/home1/main.png";
     import FaqQuestion from "$lib/components/cards/FaqQuestion.svelte";
 
     interface faq {
@@ -19,9 +18,13 @@
 
 </script>
 
-<section>
-    <h2 class="title-section text-center">Ответы на ваши вопросы</h2>
-    <h3 class="desc-section mb-6.5 text-center">Чтобы вам было проще</h3>
+<section class="lg:px-8 xl:max-w-[1200px]! xl:mx-auto 2xl:max-w-[1464px]! 3xl:min-w-[1700px]">
+    <h2 class="title-section text-center">
+        Ответы на ваши вопросы
+    </h2>
+    <h3 class="desc-section mb-6.5 text-center xl:text-right xl:relative xl:-right-16 2xl:mb-14!">
+        Чтобы вам было проще
+    </h3>
     {#each faqs as faq, i (faq.id)}
         <FaqQuestion
                 {...faq}

@@ -47,13 +47,30 @@
 
 </script>
 
-<section class="px-4">
+<section class="px-4 lg:px-8 xl:px-10 3xl:max-w-[2000px]!">
     <h2 class="title-section">Наши сильные стороны</h2>
-    <h3 class="desc-section md:pl-48">Которые ценят клиенты</h3>
-    <div class="block md:grid md:grid-cols-2 md:gap-4 md:items-end md:justify-end">
+    <h3 class="desc-section md:pl-48 lg:pl-58 xl:pl-110 2xl:pl-170">Которые ценят клиенты</h3>
+    <div class="block md:grid md:grid-cols-2 md:gap-4 md:items-end md:justify-end
+            lg:grid-cols-3 lg:gap-3
+            xl:hidden
+    ">
         {#each $responsiveCards as card (card.id)}
-            <AboutCard title={card.title} description={card.desc} icon={card.icon} type={card.type} />
+            <AboutCard title={card.title} desc={card.desc} icon={card.icon} type={card.type} />
         {/each}
-        <Button text="Подробнее о нас" href="/" className="mt-7 md:mt-0" />
+        <Button text="Подробнее о нас" href="/" className="mt-7 md:mt-0 xl:hidden" />
     </div>
+    <div class="hidden xl:grid xl:grid-cols-4 xl:gap-4 xl:auto-rows-[280px] xl:mt-8 2xl:auto-rows-[340px] 2xl:gap-7 2xl:mt-12">
+        <Button text="Подробнее о нас" href="/" className="mt-57.5 w-70! 2xl:mt-72 2xl:w-74! 3xl:min-w-84" />
+
+        <AboutCard {...$responsiveCards[0]} />
+        <AboutCard {...$responsiveCards[1]} />
+
+        <AboutCard {...$responsiveCards[4]} className="row-span-2 mt-36 2xl:mt-42" />
+
+        <AboutCard {...$responsiveCards[2]} />
+        <AboutCard {...$responsiveCards[3]} />
+
+        <div></div>
+    </div>
+
 </section>

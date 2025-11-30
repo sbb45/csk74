@@ -32,10 +32,12 @@
 
 </script>
 
-<section>
+<section class="3xl:min-w-[2000px]">
     <h2 class="title-section px-4">Честные отзывы</h2>
-    <h3 class="desc-section mb-6.5 text-right px-4">о нашей работе</h3>
-    <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide ml-2">
+    <h3 class="desc-section mb-6.5 text-right px-4 md:text-left md:pl-64 lg:pl-90 xl:pl-120 2xl:pl-140">о нашей работе</h3>
+    <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide ml-2
+        md:overflow-x-visible md:grid md:grid-cols-2 md:gap-4 md:mx-4 lg:gap-3 xl:gap-4 2xl:gap-7
+    ">
         {#each reviews as review (review.id)}
             <ReviewCard {...review} />
         {/each}
