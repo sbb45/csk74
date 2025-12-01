@@ -2,9 +2,14 @@
     import menu from '$lib/assets/icons/menu.svg'
     import MobileMenu from '$lib/components/ui/MobileMenu.svelte';
     import {navigateToHash, smoothScrollTo} from "$lib/gsap/scrollTo";
+    import {onMount} from "svelte";
+    import {initMagnetButton} from "$lib/gsap/buttonHover";
+    import {initHeader} from "$lib/gsap/main-page/header";
 
     
     let isMobileMenuOpen = $state(false);
+    let headerBtn: HTMLElement;
+    let header: HTMLElement;
     
     // Мобильное меню
     function toggleMobileMenu() {
@@ -13,13 +18,22 @@
     function handleMenuClosed() {
         isMobileMenuOpen = false;
     }
-    
-    // Прокрутки к секциям
 
+    // Анимация появления
+    onMount(()=>{
+        const cleanup = initHeader({header});
+        return cleanup;
+    })
+    
+    // Анимация кнопки связаться
+    onMount(() => {
+        const cleanup = initMagnetButton(headerBtn);
+        return cleanup;
+    });
 
 </script>
 
-<header class="fixed top-0 left-0 right-0 bg-white py-3 2xl:max-w-[1760px] 2xl:mx-auto z-50 3xl:max-w-[2000px]!">
+<header bind:this={header} class="fixed -top-20 left-0 right-0 bg-white py-3 2xl:max-w-[1760px] 2xl:mx-auto z-50 3xl:max-w-[2000px]!">
     <div class="flex items-center justify-between px-4 lg:px-8 xl:px-10">
         <p class="text-2xl font-bold lg:w-[20%]">Логотип</p>
         <ul class="hidden justify-center items-center gap-4 md:flex xl:gap-6 3xl:gap-10!">
@@ -31,12 +45,12 @@
             </li>
             <li><a href="/portfolio">Портфолио</a></li>
             <li>
-                <a href="/#services" onclick={(e) => {e.preventDefault(); navigateToHash('#faq');}}>
+                <a href="/#faq" onclick={(e) => {e.preventDefault(); navigateToHash('#faq');}}>
                     Вопросы
                 </a>
             </li>
             <li>
-                <a href="/#services" onclick={(e) => {e.preventDefault(); navigateToHash('#reviews');}}>
+                <a href="/#reviews" onclick={(e) => {e.preventDefault(); navigateToHash('#reviews');}}>
                     Отзывы
                 </a>
             </li>
@@ -44,6 +58,7 @@
         <div class="hidden lg:flex justify-end items-center w-[20%]">
             <button
                onclick={() => smoothScrollTo("#contacts")}
+               bind:this={headerBtn}
                class="hidden font-bounded font-normal text-black text-base border-black border-2 rounded-3xl py-2 px-8 w-max
                     lg:block xl:px-12 3xl:px-16! 3xl:text-xl 3xl:py-3
             ">

@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { animateMobileMenuOpen, animateMobileMenuClose } from '$lib/gsap/mobileMenu';
     import Button from './Button.svelte';
+    import {navigateToHash} from "$lib/gsap/scrollTo";
     
     interface Props {
         isOpen?: boolean;
@@ -22,11 +23,11 @@
     let menuItems: HTMLElement[] = [];
     
     const menuLinks = [
-        { href: '#', text: 'О компании' },
-        { href: '#', text: 'Услуги' },
-        { href: '#', text: 'Портфолио' },
-        { href: '#', text: 'Отзывы' },
-        { href: '#', text: 'Контакты' }
+        {id: 0, href: '/about', text: 'О компании' },
+        {id: 1, href: '/#services', text: 'Услуги' },
+        {id: 2, href: '/portfolio', text: 'Портфолио' },
+        {id: 3, href: '/#faq', text: 'Вопросы' },
+        {id: 4, href: '/#reviews', text: 'Отзывы' },
     ];
 
     let animationTimeline: any = null;
@@ -95,7 +96,11 @@
         }
     }
 
-    function handleLinkClick() {
+    function handleLinkClick(id: number, href:string, e:MouseEvent) {
+        if(id === 1 || id === 3 || id===4){
+            e.preventDefault()
+            navigateToHash(href.slice(1))
+        }
         closeMenu();
     }
 
@@ -164,7 +169,7 @@
                     <li class="menu-item">
                         <a 
                             href={link.href} 
-                            onclick={handleLinkClick}
+                            onclick={() => handleLinkClick(link.id, link.href)}
                         >
                             {link.text}
                         </a>

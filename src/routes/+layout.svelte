@@ -21,6 +21,12 @@
         return () => window.removeEventListener("resize", update);
     });
 
+    // Запрещаем скрол пока не загрузился сайт
+    onMount(() => {
+        document.documentElement.classList.add("lock-scroll");
+        document.body.classList.add("lock-scroll");
+    });
+
     // Плавная прокрутка
     onMount(async () => {
         const { ScrollSmoother } = await loadGSAP();
@@ -36,7 +42,11 @@
             speed: get(isLarge) ? 0.6 : 1
         });
 
-        setTimeout(() => setSmootherReady(), 50);
+        setTimeout(() => {
+            document.documentElement.classList.remove("lock-scroll");
+            document.body.classList.remove("lock-scroll");
+            setSmootherReady();
+        }, 100);
     });
 
     afterNavigate((nav) => {

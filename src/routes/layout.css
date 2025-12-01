@@ -37,6 +37,12 @@ html, body {
     overflow: hidden;
     height: 100%;
 }
+html.lock-scroll,
+body.lock-scroll {
+    overflow: hidden !important;
+    height: 100%;
+    overscroll-behavior: none;
+}
 #smooth-wrapper {
     height: 100%;
     overflow: hidden;
@@ -46,12 +52,12 @@ html, body {
 }
 @media (min-width: 1024px) {
     footer {
-        padding-bottom: 20px;
+        padding-bottom: 90px;
     }
 }
 @media (min-width: 1513px) {
     footer {
-        padding-bottom: 30px;
+        padding-bottom:110px;
     }
 }
 section{
