@@ -38,7 +38,7 @@
 
 </script>
 
-<section>
+<section id="portfolio">
     <h2 class="title-section text-center">Наши работы</h2>
     <h3 class="desc-section mb-6.5 text-center xl:hidden">Которые мы реализовали</h3>
     <h3 class="desc-section text-center hidden xl:block">Которые мы реализовали под «ПОД КЛЮЧ»</h3>

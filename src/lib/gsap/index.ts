@@ -6,31 +6,37 @@ let ScrollSmootherInstance: any = null; // Плавная прокрутка
 let ScrollToPluginInstance: any = null; // Плавная прокрутка к секции
 
 export async function loadGSAP() {
-    if (!browser) return { gsap: null, ScrollTrigger: null, ScrollSmoother: null };
+    if (!browser) return {
+        gsap: null,
+        ScrollTrigger: null,
+        ScrollToPlugin: null,
+        ScrollSmoother: null
+    };
 
     if (!gsapInstance) {
         const gsapModule = await import("gsap");
         const stModule = await import("gsap/ScrollTrigger");
-        const ssModule = await import("gsap/ScrollSmoother");
         const stpModule = await import("gsap/ScrollToPlugin");
+        const smModule = await import("gsap/ScrollSmoother");
 
         const gsap = gsapModule.default;
-        const ScrollTrigger = stModule.ScrollTrigger || stModule.default;
-        const ScrollSmoother = ssModule.ScrollSmoother || ssModule.default;
-        const ScrollToPlugin = stpModule.ScrollToPlugin || stpModule.default;
 
-        gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
+        const ScrollTrigger = stModule.ScrollTrigger || stModule.default;
+        const ScrollToPlugin = stpModule.ScrollToPlugin || stpModule.default;
+        const ScrollSmoother = smModule.ScrollSmoother || smModule.default;
+
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother);
 
         gsapInstance = gsap;
         ScrollTriggerInstance = ScrollTrigger;
-        ScrollSmootherInstance = ScrollSmoother;
         ScrollToPluginInstance = ScrollToPlugin;
+        ScrollSmootherInstance = ScrollSmoother;
     }
 
     return {
         gsap: gsapInstance,
         ScrollTrigger: ScrollTriggerInstance,
-        ScrollSmoother: ScrollSmootherInstance,
-        ScrollToPlugin: ScrollToPluginInstance
+        ScrollToPlugin: ScrollToPluginInstance,
+        ScrollSmoother: ScrollSmootherInstance
     };
 }

@@ -1,29 +1,80 @@
-import {loadGSAP} from "$lib/gsap/index";
+import { loadGSAP } from "$lib/gsap";
+import { goto } from '$app/navigation';
 
-export async function smoothScrollTo(target: string | HTMLElement, offset:number) {
+// Прокрутка к секции
+export async function smoothScrollTo(target: string | HTMLElement) {
     const { gsap, ScrollSmoother } = await loadGSAP();
     if (!gsap) return;
 
-    let element: HTMLElement | null =
+    const el =
         typeof target === "string"
-            ? document.querySelector(target)
+            ? document.querySelector<HTMLElement>(target)
             : target;
 
-    if (!element) return;
+    if (!el) return;
 
     const smoother = ScrollSmoother?.get();
 
-    // С ScrollSmoother
     if (smoother) {
-        const y = smoother.offset(element, "top") - offset;
-        smoother.scrollTo(y, true);
+        // "top top" – верх элемента к верху viewport
+        // "-=X" – сдвиг на высоту хэдера
+        const position = `top top-=-80}`;
+
+        smoother.scrollTo(el, true, position);
         return;
     }
 
-    // Без ScrollSmoother
+    // Фоллбек без ScrollSmoother
     gsap.to(window, {
         duration: 1,
-        scrollTo: { y: element, offsetY: offset },
+        scrollTo: {
+            y: el,
+            offsetY: -80
+        },
         ease: "power2.out"
     });
+}
+
+// Проверка подгружена ли плавная прокрутка перед ней
+let smootherReady = false;
+
+export function setSmootherReady() {
+    smootherReady = true;
+}
+
+export function scrollWhenReady(hash: string) {
+    const tryScroll = () => {
+        if (!smootherReady) {
+            requestAnimationFrame(tryScroll);
+            return;
+        }
+
+        const el = document.querySelector<HTMLElement>(hash);
+        if (!el) {
+            requestAnimationFrame(tryScroll);
+            return;
+        }
+
+        smoothScrollTo(hash);
+    };
+
+    tryScroll();
+}
+// Скролл к объекту даже если мы на другой странице
+export function navigateToHash(hash: string) {
+    if (window.location.pathname === '/') {
+        scrollWhenReady(hash);
+        history.replaceState(history.state, '', '/' + hash);
+    } else {
+        // переходим на главную БЕЗ автоматического скролла
+        goto('/', {
+            replaceState: false,
+            keepFocus: true,
+            noScroll: true
+        });
+        setTimeout(() => {
+            scrollWhenReady(hash)
+            history.replaceState(history.state, '', '/' + hash);
+        }, 50);
+    }
 }

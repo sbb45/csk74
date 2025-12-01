@@ -49,7 +49,6 @@
         position: relative;
         background-color: #202020;
         z-index: 3;
-        padding-bottom: 90px;
         li a{
             font-family: "Manrope", sans-serif;
             color: #F3F1EF;
@@ -97,9 +96,6 @@
         }
     }
     @media (min-width: 1024px) {
-        footer{
-            padding-bottom: 110px;
-        }
         footer::before{
             left: 60%;
             background: url('/assets/footer_desktop.svg') no-repeat top center;
@@ -108,9 +104,6 @@
         .contacts{width: auto}
     }
     @media (min-width: 1513px) {
-        footer{
-            padding-bottom: 130px;
-        }
         footer li a{
             font-size: 24px;
         }

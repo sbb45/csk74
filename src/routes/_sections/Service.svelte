@@ -32,7 +32,7 @@
     })
 </script>
 
-<section class="px-4 relative
+<section id="services" class="px-4 relative
     lg:grid lg:grid-cols-[400px_1fr] lg:gap-2 lg:items-start
     xl:grid-cols-[600px_1fr] xl:gap-6 xl:px-6
     2xl:grid-cols-[1fr_1fr] 2xl:px-10 3xl:max-w-[2000px]!

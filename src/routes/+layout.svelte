@@ -6,6 +6,8 @@
     import {isLarge} from "$lib/stores/breakpoint";
     import {loadGSAP} from "$lib/gsap";
     import {get} from "svelte/store";
+    import {scrollWhenReady, setSmootherReady} from "$lib/gsap/scrollTo";
+    import {afterNavigate} from "$app/navigation";
 
 	let { children } = $props();
 
@@ -20,10 +22,9 @@
     });
 
     // Плавная прокрутка
-    onMount(async ()=>{
-        const {ScrollSmoother} = await loadGSAP();
-        if(!ScrollSmoother) return;
-        const large = get(isLarge)
+    onMount(async () => {
+        const { ScrollSmoother } = await loadGSAP();
+        if (!ScrollSmoother) return;
 
         ScrollSmoother.create({
             wrapper: "#smooth-wrapper",
@@ -32,9 +33,21 @@
             effects: true,
             normalizeScroll: true,
             smoothTouch: 0.1,
-            speed: large ? 0.5 : 1
-        })
+            speed: get(isLarge) ? 0.6 : 1
+        });
+
+        setTimeout(() => setSmootherReady(), 50);
     });
+
+    afterNavigate((nav) => {
+        if (!nav?.to) return;
+        const { pathname, hash } = nav.to.url;
+        if (pathname === '/' && hash) {
+            scrollWhenReady(hash);
+        }
+    });
+
+
 </script>
 
 <Header />

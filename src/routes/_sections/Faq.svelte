@@ -18,7 +18,7 @@
 
 </script>
 
-<section class="lg:px-8 xl:max-w-[1200px]! xl:mx-auto 2xl:max-w-[1464px]! 3xl:min-w-[1700px]">
+<section id="faq" class="lg:px-8 xl:max-w-[1200px]! xl:mx-auto 2xl:max-w-[1464px]! 3xl:min-w-[1700px]">
     <h2 class="title-section text-center">
         Ответы на ваши вопросы
     </h2>

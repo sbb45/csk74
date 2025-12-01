@@ -13,7 +13,7 @@
     }
 </script>
 
-<section class="mx-2 relative bg-[url('/assets/contacts.png')] bg-cover bg-center rounded-xl py-10 px-5.5
+<section id="contacts" class="mx-2 relative bg-[url('/assets/contacts.png')] bg-cover bg-center rounded-xl py-10 px-5.5
     lg:flex lg:justify-between lg:items-start lg:px-8 lg:mx-4 lg:py-20 lg:relative
     xl:max-w-[1200px]! xl:mx-auto xl:px-10 xl:py-26 xl:rounded-2xl
     2xl:rounded-3xl 2xl:max-w-[1580px]! 2xl:px-12 3xl:min-w-[1700px]
