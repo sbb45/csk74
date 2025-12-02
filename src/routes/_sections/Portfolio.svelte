@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import {onDestroy, onMount} from "svelte";
 
     import Button from "$lib/components/ui/Button.svelte";
     import img1 from "$lib/images/portfolio/home1/main.png";
-    import {loadGSAP} from "$lib/gsap";
+    import {initPortfolioScroll} from "$lib/gsap/portfolioScroll";
 
     interface Image {
         id: number;
@@ -35,7 +35,17 @@
         columns[i % 3].push(item);
     });
 
+    let gridRef: HTMLElement;
+    let cleanup: (() => void) | undefined;
 
+    onMount(async () => {
+        if (!gridRef) return;
+        cleanup = await initPortfolioScroll(gridRef);
+    });
+
+    onDestroy(() => {
+        cleanup?.();
+    });
 </script>
 
 <section id="portfolio">
@@ -43,14 +53,17 @@
     <h3 class="desc-section mb-6.5 text-center xl:hidden">Которые мы реализовали</h3>
     <h3 class="desc-section text-center hidden xl:block">Которые мы реализовали под «ПОД КЛЮЧ»</h3>
 
-    <div class="grid grid-cols-2 gap-x-2 px-2 mask-columns
+    <div bind:this={gridRef} class="grid grid-cols-2 gap-x-2 px-2 mask-columns
         md:grid-cols-3 md:max-h-200
         lg:px-8 lg:max-h-280
         xl:max-w-[1200px] xl:gap-x-4 xl:max-h-320 xl:mx-auto xl:mt-10
         2xl:max-w-[1414px] 2xl:gap-x-6 2xl:max-h-380
         3xl:max-w-[1700px]!
     ">
-        <div class="flex flex-col gap-2 xl:gap-4 2xl:gap-6">
+        <div class="flex flex-col gap-2 xl:gap-4 2xl:gap-6"
+             data-portfolio-col
+             data-direction="1"
+        >
             {#each col1 as img (img.id)}
                 <img
                         src={img.src}
@@ -60,7 +73,10 @@
             {/each}
         </div>
 
-        <div class="flex flex-col gap-2 xl:gap-4 2xl:gap-6">
+        <div class="flex flex-col gap-2 xl:gap-4 2xl:gap-6"
+             data-portfolio-col
+             data-direction="-1"
+        >
             {#each col2 as img (img.id)}
                 <img
                         src={img.src}
@@ -70,7 +86,10 @@
             {/each}
         </div>
 
-        <div class="hidden md:flex flex-col gap-2 xl:gap-4 2xl:gap-6">
+        <div class="hidden md:flex flex-col gap-2 xl:gap-4 2xl:gap-6"
+             data-portfolio-col
+             data-direction="1"
+        >
             {#each col3 as img (img.id)}
                 <img
                         src={img.src}

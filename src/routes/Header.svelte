@@ -4,9 +4,8 @@
     import {navigateToHash, smoothScrollTo} from "$lib/gsap/scrollTo";
     import {onMount} from "svelte";
     import {initMagnetButton} from "$lib/gsap/buttonHover";
-    import {initHeader} from "$lib/gsap/main-page/header";
+    import {initHeader} from "$lib/gsap/main-page/general";
 
-    
     let isMobileMenuOpen = $state(false);
     let headerBtn: HTMLElement;
     let header: HTMLElement;

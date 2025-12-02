@@ -4,6 +4,7 @@
     export let icon: string;
     export let className: string = "";
     export let type: "black" | "cut" | undefined;
+    export let el: HTMLElement;
 
     $: cardClasses =
         type === "black"
@@ -14,6 +15,7 @@
 </script>
 
 <div
+    bind:this={el}
     class={`w-full h-[184px] flex justify-between items-start flex-col py-4 px-4.5 mb-4 md:mb-0 lg:h-[200px]
         ${cardClasses} ${className}
         rounded-[24px] overflow-hidden
