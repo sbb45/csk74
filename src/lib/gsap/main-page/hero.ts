@@ -45,7 +45,7 @@ export function initHeroReveal({
 
             // 2. Нижний скос
             .from(maskBottom, {
-                y: 340,
+                y: 390,
                 duration: 0.6,
                 ease: "power2.out"
             }, 0.6)

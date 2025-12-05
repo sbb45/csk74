@@ -9,7 +9,7 @@ import Review from "./_sections/Review.svelte";
 
 </script>
 
-<main>
+<main id="content-page">
     <Hero />
     <About />
     <Portfolio />

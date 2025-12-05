@@ -1,5 +1,7 @@
 <script lang="ts">
     import FaqQuestion from "$lib/components/cards/FaqQuestion.svelte";
+    import {onMount} from "svelte";
+    import {initTitle} from "$lib/gsap/main-page/general";
 
     interface faq {
         id: number,
@@ -16,9 +18,14 @@
         {id: 5, question: "Есть ли гарантия на работы?", answer: "Да. Мы даём гарантию и остаёмся на связи после сдачи дома."},
     ];
 
+    let section: HTMLElement;
+    onMount(()=>{
+        initTitle(section);
+    })
+
 </script>
 
-<section id="faq" class="lg:px-8 xl:max-w-[1200px]! xl:mx-auto 2xl:max-w-[1464px]! 3xl:min-w-[1700px]">
+<section bind:this={section} id="faq" class="lg:px-8 xl:max-w-[1200px]! xl:mx-auto 2xl:max-w-[1464px]! 3xl:min-w-[1700px]">
     <h2 class="title-section text-center">
         Ответы на ваши вопросы
     </h2>

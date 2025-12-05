@@ -1,6 +1,9 @@
 <script lang="ts">
     import img1 from "$lib/images/portfolio/home1/main.png";
     import ReviewCard from "$lib/components/cards/ReviewCard.svelte";
+    import {onMount} from "svelte";
+    import {initTitle} from "$lib/gsap/main-page/general";
+    import {initReview} from "$lib/gsap/main-page/review";
 
     interface Review {
         id: number,
@@ -30,9 +33,13 @@
         },
     ];
 
+    let section: HTMLElement;
+    onMount(()=>{
+        initReview(section);
+    })
 </script>
 
-<section id="reviews" class="3xl:min-w-[2000px]">
+<section bind:this={section} id="reviews" class="3xl:min-w-[2000px]">
     <h2 class="title-section px-4">Честные отзывы</h2>
     <h3 class="desc-section mb-6.5 text-right px-4 md:text-left md:pl-64 lg:pl-90 xl:pl-120 2xl:pl-140">о нашей работе</h3>
     <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide ml-2

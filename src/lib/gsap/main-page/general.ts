@@ -32,7 +32,7 @@ export async function initTitle(section: HTMLElement) {
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: section,
-            start: "top 80%",
+            start: "top 70%",
             once: true
         }
     });

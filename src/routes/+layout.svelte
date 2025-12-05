@@ -1,5 +1,5 @@
 <script lang="ts">
-	import './layout.css';
+    import './layout.css';
     import Header from "./Header.svelte";
     import Footer from "./Footer.svelte";
     import {onMount} from "svelte";
@@ -9,7 +9,7 @@
     import {scrollWhenReady, setSmootherReady} from "$lib/gsap/scrollTo";
     import {afterNavigate} from "$app/navigation";
 
-	let { children } = $props();
+    let { children } = $props();
 
     // Проверка ширины экрана
     onMount(()=>{

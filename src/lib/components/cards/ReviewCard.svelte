@@ -13,7 +13,7 @@
             : "bg-white text-gray border-black border-2 rounded-xl xl:rounded-2xl";
 </script>
 
-<div class={`w-[350px] flex-shrink-0 snap-start border-2 border-dark-gray overflow-hidden last:mr-2 ${cardClasses} md:w-auto md:last:mr-0 lg:flex`}>
+<div class={`card w-[350px] flex-shrink-0 snap-start border-2 border-dark-gray overflow-hidden last:mr-2 ${cardClasses} md:w-auto md:last:mr-0 lg:flex`}>
     <div class="font-manrope py-5 px-3.5 flex flex-col gap-3 lg:w-[110%] lg:justify-between
         xl:py-7 xl:px-4.5 2xl:w-[100%] 2xl:py-8 2xl:px-6
         {id === 2 || id === 3 ? 'lg:order-2' : 'lg:order-1'}

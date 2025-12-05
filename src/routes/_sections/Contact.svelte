@@ -1,32 +1,38 @@
 <script lang="ts">
     import Button from "$lib/components/ui/Button.svelte";
+    import {onMount} from "svelte";
+    import {initContacts} from "$lib/gsap/main-page/contact";
 
     let name = "";
     let phone = "";
     let message = "";
 
     function handleSubmit(){
-        console.log('имя: ', name);
         name = "";
         phone = "";
         message = "";
     }
+
+    let section: HTMLElement;
+    onMount(()=>{
+        initContacts(section)
+    })
 </script>
 
-<section id="contacts" class="mx-2 relative bg-[url('/assets/contacts.png')] bg-cover bg-center rounded-xl py-10 px-5.5
+<section bind:this={section} id="contacts" class="mx-2 relative bg-[url('/assets/contacts.png')] bg-cover bg-center rounded-xl py-10 px-5.5
     lg:flex lg:justify-between lg:items-start lg:px-8 lg:mx-4 lg:py-20 lg:relative
     xl:max-w-[1200px]! xl:mx-auto xl:px-10 xl:py-26 xl:rounded-2xl
     2xl:rounded-3xl 2xl:max-w-[1580px]! 2xl:px-12 3xl:min-w-[1700px]
 ">
     <div class="lg:h-[450px] lg:flex lg:justify-between lg:items-start lg:flex-col lg:py-4 xl:h-[514px] 2xl:py-6">
         <div>
-            <h2 class="title-section text-white! text-[22px]! mb-2! text-center
+            <h2 class="text title-section text-white! text-[22px]! mb-2! text-center
                 md:text-3xl! lg:text-start lg:text-4xl! lg:mb-3! xl:text-[42px]!
                 2xl:text-[48px]!
             ">
                 Свяжитесь с нами
             </h2>
-            <p class="font-manrope font-normal text-white text-sm leading-4.5 text-center max-w-[308px] mx-auto md:text-xl
+            <p class="text font-manrope font-normal text-white text-sm leading-4.5 text-center max-w-[308px] mx-auto md:text-xl
                 md:max-w-[480px] md:leading-6
                 lg:text-start lg:mx-0 lg:text-lg lg:max-w-[420px]
                 xl:text-xl xl:max-w-[440px] xl:leading-7
@@ -37,8 +43,8 @@
         </div>
 
         <div class="hidden lg:block">
-            <h3><a href="mailto:support@site.ru" class="contact mb-1.5">support@site.ru</a></h3>
-            <h3><a href="tel:+79193125145" class="contact">+7 (919) 312-51-45</a></h3>
+            <h3><a href="mailto:support@site.ru" class="contact text mb-1.5">support@site.ru</a></h3>
+            <h3><a href="tel:+79193125145" class="contact text">+7 (919) 312-51-45</a></h3>
         </div>
     </div>
 
@@ -62,20 +68,19 @@
 
     <h3 class="lg:hidden"><a href="mailto:support@site.ru" class="contact mb-1.5">support@site.ru</a></h3>
     <h3 class="lg:hidden"><a href="tel:+79193125145" class="contact">+7 (919) 312-51-45</a></h3>
+
+    <span class="none rounded-3xl xl:block cutting"></span>
 </section>
 
 <style>
-    section::before{
-        content: "";
-        display: none;
+    section span {
         position: absolute;
         top: 50%;
-        left: -60px;
-        transform: translateY(-50%);
-        width: 160px;
-        height: 140px;
-        background: url('/assets/contact-decor.svg') no-repeat top center;
-        background-size: contain;
+        left: -100px;
+        width: 170px;
+        height: 170px;
+        transform: translateY(-50%) rotate(45deg);
+        background-color: #f3f1ef;
         pointer-events: none;
         z-index: 1;
     }
@@ -111,7 +116,7 @@
             height: 52px;
             margin-bottom: 12px;
         }
-        section::before{display: block}
+        section::before { display: block; }
     }
     @media (min-width: 1280px) {
         input{height: 56px;}

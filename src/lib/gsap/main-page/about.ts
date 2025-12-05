@@ -2,7 +2,7 @@ import {loadGSAP} from "$lib/gsap";
 
 export interface InitAboutSection {
     section: HTMLElement,
-    btn: HTMLElement,
+    btn?: HTMLElement | null,
     cards: HTMLElement[],
 }
 
@@ -35,24 +35,33 @@ export async function initAboutSection({
         opacity: 0,
         duration: 0.6,
         ease: "power2.out"
-    }, "-=0.4").from(btn, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power3.out"
-    }, 0);
+    }, "-=0.4");
 
-    gsap.from(cards, {
-        y:40,
+    if (btn) {
+        tl.from(btn, {
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power3.out"
+        }, 0);
+    }
+
+    const cardList = cards.filter((card): card is HTMLElement => Boolean(card));
+    const cardsTrigger = section ?? cardList[0]?.closest("section");
+    if (!cardList.length || !cardsTrigger) return;
+
+    gsap.from(cardList, {
+        y: 50,
         opacity: 0,
-        scale: 0.96,
-        duration: 0.4,
+        scale: 0.94,
+        rotateX: -6,
+        duration: 0.65,
         ease: "power3.out",
-        stagger: 0.12,
+        stagger: 0.14,
         scrollTrigger: {
-            trigger: cards[0].closest("section"),
-            start: "top 40%",
+            trigger: cardsTrigger,
+            start: "top 55%",
             once: true
         }
-    })
+    });
 }

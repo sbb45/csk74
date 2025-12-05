@@ -6,12 +6,15 @@
     import hammer from "$lib/assets/icons/services/hammer.svg";
     import doorOpen from "$lib/assets/icons/services/door_open.svg";
     import ServiceCard from "$lib/components/cards/ServiceCard.svelte";
+    import {onDestroy, onMount} from "svelte";
+    import {titleScroll} from "$lib/gsap/main-page/service";
 
     interface Card {
         id: number;
         title: string;
         desc: string;
         icon: string;
+        className?: string;
         type?: "black";
     }
 
@@ -25,19 +28,28 @@
 
     const leftColumn:Card[] = [];
     const rightColumn:Card[] = [];
-
     cards.forEach((item, i)=>{
         if(i % 2 === 0) leftColumn.push(item)
         else rightColumn.push(item)
     })
+
+    let servicesRef: HTMLElement;
+    let cleanup: (() => void) | undefined;
+    onMount(async () => {
+        cleanup = await titleScroll(servicesRef);
+    })
+    onDestroy(()=>{
+        cleanup?.();
+    })
 </script>
 
-<section id="services" class="px-4 relative
+<section id="services" bind:this={servicesRef} class="px-4 relative
     lg:grid lg:grid-cols-[400px_1fr] lg:gap-2 lg:items-start
-    xl:grid-cols-[600px_1fr] xl:gap-6 xl:px-6
+    xl:grid-cols-[600px_1fr] xl:gap-6 xl:px-6 xl:py-16
     2xl:grid-cols-[1fr_1fr] 2xl:px-10 3xl:max-w-[2000px]!
+
 ">
-    <div class="lg:sticky lg:top-22 xl:top-24">
+    <div data-services-left>
         <h2 class="title-section lg:text-[40px]! xl:text-5xl! 2xl:text-[64px]! 3xl:max-w-200">
             Что мы делаем для клиента
         </h2>
@@ -51,25 +63,25 @@
             Наша задача — чистая работа и результат, за который не стыдно.
         </p>
     </div>
-    <div class="border-2 border-black rounded-xl flex flex-col justify-center items-start mt-6 md:hidden">
+    <div data-services-right="mobile" class="border-2 border-black rounded-xl flex flex-col justify-center items-start mt-6 md:hidden">
         {#each cards as card (card.id)}
-            <ServiceCard {...card} />
+            <ServiceCard {...card} className="service-card" />
         {/each}
     </div>
-    <div class="hidden md:mt-6 md:grid md:grid-cols-2 lg:mt-0 lg:h-full">
-        <div class="border-2 border-black rounded-l-xl rounded-br-xl xl:rounded-l-2xl xl:rounded-br-2xl 2xl:rounded-l-3xl 2xl:rounded-br-3xl">
+    <div data-services-right="desktop" class="hidden md:mt-6 md:grid md:grid-cols-2 lg:mt-0 lg:h-full">
+        <div class="service-card border-2 border-black rounded-l-xl rounded-br-xl xl:rounded-l-2xl xl:rounded-br-2xl 2xl:rounded-l-3xl 2xl:rounded-br-3xl">
             {#each leftColumn as card (card.id)}
-                <ServiceCard {...card} />
+                <ServiceCard {...card} className="service-card" />
             {/each}
         </div>
         <div>
-            <div class="border-2 border-black border-l-0 rounded-r-xl xl:rounded-r-2xl 2xl:rounded-r-3xl">
+            <div class="service-card border-2 border-black border-l-0 rounded-r-xl xl:rounded-r-2xl 2xl:rounded-r-3xl">
                 {#each rightColumn as card (card.id)}
-                    <ServiceCard {...card} />
+                    <ServiceCard {...card} className="service-card" />
                 {/each}
             </div>
 
-            <div class={`w-[300px] h-[340px] flex justify-center items-center flex-col mx-auto lg:px-4 xl:w-auto 2xl:h-[440px]`}>
+            <div class={`w-[300px] h-[340px] flex justify-center items-center flex-col mx-auto lg:px-4 xl:w-auto 2xl:h-[440px] service-card`}>
                 <h4 class="font-manrope font-normal text-2xl leading-6.5 mb-3 text-center
                     lg:text-xl lg:leading-5
                     xl:text-2xl xl:leading-6 xl:mb-4

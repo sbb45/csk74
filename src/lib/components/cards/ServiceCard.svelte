@@ -4,6 +4,7 @@
     export let desc: string;
     export let icon: string;
     export let type: "black" | undefined = undefined;
+    export let className: string;
 
     $: cardClasses =
         type === "black"
@@ -16,6 +17,7 @@
             xl:h-[380px] xl:px-6
             2xl:h-[440px] 2xl:gap-y-8
             ${cardClasses}
+            ${className}
             ${id === 2 ? 'md:border-b-2 md:border-b-black' : ''}`}
 >
     <img src={icon} alt="Иконка карточки" class="md:w-19 2xl:w-22">

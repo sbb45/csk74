@@ -14,11 +14,13 @@ export async function smoothScrollTo(target: string | HTMLElement) {
     if (!el) return;
 
     const smoother = ScrollSmoother?.get();
+    const header = document.querySelector<HTMLElement>("header");
+    const offset = (header?.offsetHeight ?? 0) + 8;
 
     if (smoother) {
         // "top top" – верх элемента к верху viewport
         // "-=X" – сдвиг на высоту хэдера
-        const position = `top top-=-80}`;
+        const position = offset ? `top top-=${offset}` : "top top";
 
         smoother.scrollTo(el, true, position);
         return;
@@ -29,7 +31,7 @@ export async function smoothScrollTo(target: string | HTMLElement) {
         duration: 1,
         scrollTo: {
             y: el,
-            offsetY: -80
+            offsetY: offset
         },
         ease: "power2.out"
     });
