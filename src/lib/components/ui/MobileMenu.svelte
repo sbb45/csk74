@@ -1,8 +1,8 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { animateMobileMenuOpen, animateMobileMenuClose } from '$lib/gsap/mobileMenu';
+    import { navigateToHash, navigateToPath } from "$lib/gsap/scrollTo";
     import Button from './Button.svelte';
-    import {navigateToHash} from "$lib/gsap/scrollTo";
     
     interface Props {
         isOpen?: boolean;
@@ -21,13 +21,13 @@
     let menu: HTMLElement;
     let closeButton: HTMLElement;
     let menuItems: HTMLElement[] = [];
-    
+
     const menuLinks = [
-        {id: 0, href: '/about', text: 'О компании' },
-        {id: 1, href: '/#services', text: 'Услуги' },
-        {id: 2, href: '/portfolio', text: 'Портфолио' },
-        {id: 3, href: '/#faq', text: 'Вопросы' },
-        {id: 4, href: '/#reviews', text: 'Отзывы' },
+        { id: 0, href: '/about', text: 'О компании' },
+        { id: 1, href: '#services', text: 'Услуги' },
+        { id: 2, href: '/portfolio', text: 'Портфолио' },
+        { id: 3, href: '#faq', text: 'Вопросы' },
+        { id: 4, href: '#reviews', text: 'Отзывы' },
     ];
 
     let animationTimeline: any = null;
@@ -90,18 +90,10 @@
         }, 50);
     }
 
-    function handleOverlayClick(e: MouseEvent) {
+    function handleOverlayClick(e: Event) {
         if (e.target === overlay) {
             closeMenu();
         }
-    }
-
-    function handleLinkClick(id: number, href:string, e:MouseEvent) {
-        if(id === 1 || id === 3 || id===4){
-            e.preventDefault()
-            navigateToHash(href.slice(1))
-        }
-        closeMenu();
     }
 
     // Обработка ESC клавиши
@@ -129,16 +121,31 @@
             unlockBodyScroll();
         }
     });
+
+    function handleLinkClick(href: string) {
+        if (href.startsWith('#')) {
+            navigateToHash(href);
+        } else {
+            navigateToPath(href);
+        }
+        closeMenu();
+    }
+
 </script>
 
 {#if isOpen}
     <div
         bind:this={overlay}
         class="mobile-menu-overlay"
-        role="dialog"
+        role="button"
         aria-modal="true"
         aria-label="Мобильное меню"
         onclick={handleOverlayClick}
+        onkeydown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                handleOverlayClick(event);
+            }
+        }}
         tabindex="-1"
     >
         <nav
@@ -167,12 +174,12 @@
             <ul class="mobile-menu-links">
                 {#each menuLinks as link}
                     <li class="menu-item">
-                        <a 
-                            href={link.href} 
-                            onclick={() => handleLinkClick(link.id, link.href)}
+                        <button
+                            type="button"
+                            onclick={() => handleLinkClick(link.href)}
                         >
                             {link.text}
-                        </a>
+                        </button>
                     </li>
                 {/each}
             </ul>
@@ -267,7 +274,7 @@
         transform: translateX(-50px);
     }
 
-    .menu-item a {
+    .menu-item button {
         display: block;
         font-family: "Manrope", sans-serif;
         font-weight: 500;
@@ -280,7 +287,7 @@
         position: relative;
     }
 
-    .menu-item a::before {
+    .menu-item button::before {
         content: '';
         position: absolute;
         left: 0;
@@ -291,12 +298,12 @@
         transition: width 0.3s ease;
     }
 
-    .menu-item a:hover {
+    .menu-item button:hover {
         color: #202020;
         padding-left: 1.5rem;
     }
 
-    .menu-item a:hover::before {
+    .menu-item button:hover::before {
         width: 4px;
     }
 

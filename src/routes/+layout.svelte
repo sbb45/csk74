@@ -9,7 +9,28 @@
     import {scrollWhenReady, setSmootherReady} from "$lib/gsap/scrollTo";
     import {afterNavigate} from "$app/navigation";
 
-    let { children } = $props();
+    let { children, data } = $props();
+
+    // SEO
+    const { seo, siteConfig } = data;
+    const jsonLdLocalBusiness = {
+        '@context': 'https://schema.org',
+        '@type': 'HomeAndConstructionBusiness',
+        name: siteConfig.name,
+        url: siteConfig.url,
+        telephone: siteConfig.phone,
+        image: siteConfig.logo,
+        address: {
+            '@type': 'PostalAddress',
+            addressLocality: siteConfig.address.locality,
+            addressCountry: siteConfig.address.country
+        },
+        areaServed: {
+            '@type': 'AdministrativeArea',
+            name: 'Челябинск и Челябинская область'
+        },
+        description: siteConfig.description
+    };
 
     // Проверка ширины экрана
     onMount(()=>{
@@ -39,7 +60,7 @@
             effects: true,
             normalizeScroll: true,
             smoothTouch: 0.1,
-            speed: get(isLarge) ? 0.6 : 1
+            speed: get(isLarge) ? 0.7 : 1
         });
 
         setTimeout(() => {
@@ -56,9 +77,47 @@
             scrollWhenReady(hash);
         }
     });
-
-
 </script>
+
+<svelte:head>
+    <!-- Основное -->
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <meta name="language" content={siteConfig.language} />
+    {#if seo.noindex}
+        <meta name="robots" content="noindex, nofollow" />
+    {:else}
+        <meta name="robots" content="index, follow" />
+    {/if}
+
+    <!-- Canonical -->
+    <link rel="canonical" href={seo.canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={seo.ogType} />
+    <meta property="og:title" content={seo.ogTitle} />
+    <meta property="og:description" content={seo.ogDescription} />
+    <meta property="og:url" content={seo.url} />
+    <meta property="og:site_name" content={`${siteConfig.name} — ${siteConfig.tagline}`} />
+    <meta property="og:locale" content={siteConfig.locale} />
+    {#if seo.image}
+        <meta property="og:image" content={seo.image} />
+    {/if}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.ogTitle} />
+    <meta name="twitter:description" content={seo.ogDescription} />
+    {#if seo.image}
+        <meta name="twitter:image" content={seo.image} />
+    {/if}
+
+    <!-- JSON-LD LocalBusiness -->
+    <script type="application/ld+json">
+        {JSON.stringify(jsonLdLocalBusiness)}
+    </script>
+</svelte:head>
+
 
 <Header />
 <div id="smooth-wrapper">

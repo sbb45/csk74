@@ -1,10 +1,33 @@
 <script lang="ts">
     import tg from '$lib/assets/icons/social/telegram.svg'
     import whatsapp from '$lib/assets/icons/social/whatsapp.svg'
+    import {onMount} from "svelte";
+    import {initFooterLinks, initFooterReveal, initSocialIconHover} from "$lib/gsap/interaction";
 
+    let footerRef: HTMLElement;
+    let socialLink1: HTMLAnchorElement;
+    let socialLink2: HTMLAnchorElement;
+
+    onMount(() => {
+        const cleanup1 = initFooterLinks(footerRef);
+        const cleanup2 = initSocialIconHover(socialLink1);
+        const cleanup3 = initSocialIconHover(socialLink2);
+        let cleanup4: (() => void) | undefined;
+
+        initFooterReveal(footerRef).then(cleanup => {
+            cleanup4 = cleanup;
+        });
+
+        return () => {
+            cleanup1();
+            cleanup2();
+            cleanup3();
+            cleanup4?.();
+        };
+    });
 </script>
 
-<footer class="w-full mt-45 lg:px-8 xl:px-10">
+<footer bind:this={footerRef} class="w-full mt-45 lg:px-8 xl:px-10">
     <h3 class="font-bounded px-4 font-normal text-white text-3xl text-center uppercase pt-6
         md:text-4xl lg:text-5xl lg:px-0 lg:pt-14 xl:text-[55px] 2xl:text-7xl 2xl:pt-20 3xl:text-[80px]!
     ">
@@ -30,8 +53,8 @@
                 +7 (919) 312-51-45
             </h4>
             <div class="flex justify-start items-center gap-x-4 md:justify-center lg:justify-end">
-                <a href="/"><img src={tg} alt="telegram"></a>
-                <a href="/"><img src={whatsapp} alt="whatsapp"></a>
+                <a bind:this={socialLink1} href="/"><img src={tg} alt="telegram"></a>
+                <a bind:this={socialLink2} href="/"><img src={whatsapp} alt="whatsapp"></a>
             </div>
         </div>
     </div>
@@ -40,7 +63,7 @@
         lg:flex-row lg:justify-between lg:mt-0 2xl:max-w-[1760px] 2xl:mx-auto 2xl:text-xl 3xl:max-w-[2000px]!
     ">
         <a href="mailto:support@site.ru" class="font-normal lg:order-2">support@site.ru</a>
-        <a href="/" class="font-light lg:order-1">Политика конфиденциальности</a>
+        <a href="/privacy" class="font-light lg:order-1">Политика конфиденциальности</a>
     </div>
 </footer>
 
@@ -59,7 +82,7 @@
     footer::before {
         content: "";
         position: absolute;
-        top: -90px;
+        top: -80px;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;

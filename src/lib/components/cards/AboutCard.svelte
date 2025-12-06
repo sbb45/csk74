@@ -1,4 +1,7 @@
 <script lang="ts">
+    import {onMount} from "svelte";
+    import {initCardHover} from "$lib/gsap/interaction";
+
     export let title: string;
     export let desc: string;
     export let icon: string;
@@ -12,6 +15,11 @@
             : type === "cut"
                 ? "bg-dark-gray text-black text-white"
                 : "text-black border-black border-2 rounded-2xl";
+
+    onMount(() => {
+        const cleanup = initCardHover(el);
+        return cleanup;
+    });
 </script>
 
 <div

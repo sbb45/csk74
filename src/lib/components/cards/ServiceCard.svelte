@@ -1,4 +1,7 @@
 <script lang="ts">
+    import {onMount} from "svelte";
+    import {initCardHover} from "$lib/gsap/interaction";
+
     export let id: number;
     export let title: string;
     export let desc: string;
@@ -10,9 +13,16 @@
         type === "black"
             ? "bg-dark-gray text-white md:rounded-br-[6px] xl:rounded-br-[12px] 2xl:rounded-br-[20px]"
             : "text-black border-t-2 border-black last:border-t-0 first:border-t-0";
+
+    // Анимация при наведении
+    let cardRef: HTMLElement;
+    onMount(() => {
+        const cleanup = initCardHover(cardRef);
+        return cleanup;
+    });
 </script>
 
-<div class={`w-full h-[198px] flex justify-between items-start flex-col py-4 px-4.5 relative
+<div bind:this={cardRef} class={`w-full h-[198px] flex justify-between items-start flex-col py-4 px-4.5 relative
             md:h-[340px] md:gap-y-6 md:justify-center
             xl:h-[380px] xl:px-6
             2xl:h-[440px] 2xl:gap-y-8

@@ -27,7 +27,7 @@ export async function animateMobileMenuOpen(
         {
             y: 0,
             opacity: 1,
-            duration: 0.5,
+            duration: 0.3,
             ease: "power3.out"
         },
         "-=0.2"
@@ -44,10 +44,10 @@ export async function animateMobileMenuOpen(
             scale: 1,
             rotation: 0,
             opacity: 1,
-            duration: 0.4,
+            duration: 0.3,
             ease: "back.out(1.7)"
         },
-        "-=0.3"
+        "-=0.1"
     );
 
     // Анимация пунктов меню (появление с задержкой)
@@ -59,7 +59,7 @@ export async function animateMobileMenuOpen(
         {
             x: 0,
             opacity: 1,
-            duration: 0.4,
+            duration: 0.2,
             ease: "power2.out",
             stagger: 0.08
         },
@@ -84,10 +84,10 @@ export async function animateMobileMenuClose(
     tl.to(menuItems, {
         x: -50,
         opacity: 0,
-        duration: 0.35,
+        duration: 0.25,
         ease: "power1.out",
         stagger: {
-            amount: 0.3,
+            amount: 0.1,
             from: "start"
         }
     });
@@ -97,7 +97,7 @@ export async function animateMobileMenuClose(
         scale: 0.8,
         rotation: 90,
         opacity: 0,
-        duration: 0.35,
+        duration: 0.25,
         ease: "power2.out"
     }, "-=0.15");
 
@@ -105,9 +105,9 @@ export async function animateMobileMenuClose(
     tl.to(menu, {
         y: -60,
         opacity: 0,
-        duration: 0.55,
+        duration: 0.35,
         ease: "power1.out"
-    }, "-=0.25");
+    }, "-=0.15");
 
     // Анимация overlay (самая последняя, плавно)
     tl.to(overlay, {

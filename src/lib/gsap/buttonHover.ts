@@ -19,32 +19,32 @@ export function initButtonAnimation({btn, inner, arrow}:ButtonAnimationRefs){
         const tlPress = gsap.timeline({paused: true});
 
         tlHover.to(inner, {
-                width: "100%",
-                duration: 0.35,
-                ease: "power2.out"
-                }, 0)
+            width: "100%",
+            duration: 0.35,
+            ease: "power2.out"
+        }, 0)
             .to(arrowPath, {
                 stroke: "#F05A28",
                 duration: 0.25,
                 ease: "power2.out"
-                }, 0)
+            }, 0)
             .to(arrow, {
                 scale: 1.15,
                 x: 4,
                 duration: 0.35,
                 ease: "back.out(2)"
-                }, 0.05);
+            }, 0.05);
 
         tlPress.to(inner, {
-                scale: 0.97,
-                duration: 0.1,
-                ease: "power1.out"
-                }, 0)
+            scale: 0.97,
+            duration: 0.1,
+            ease: "power1.out"
+        }, 0)
             .to(arrow, {
                 x: 6,
                 duration: 0.12,
                 ease: "power1.out"
-                }, 0);
+            }, 0);
 
         // Наведение
         const enter = () => tlHover.play();
@@ -121,5 +121,5 @@ export function initMagnetButton(btn:HTMLElement){
             btn.removeEventListener("pointermove", onMove);
         }
     })
-    return cleanup();
+    return () => cleanup();
 }

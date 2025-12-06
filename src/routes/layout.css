@@ -30,9 +30,6 @@
 }
 
 /* Глобальные стили */
-main{
-    z-index: 3;
-}
 html, body {
     overflow: hidden;
     background-color: #f3f1ef;
@@ -59,15 +56,11 @@ main{
 footer{
     position: relative;
     z-index: 1;
+    padding-bottom: 70px;
 }
 @media (min-width: 1024px) {
-    footer {
-        padding-bottom: 90px;
-    }
-}
-@media (min-width: 1513px) {
-    footer {
-        padding-bottom:110px;
+    footer{
+        padding-bottom: 110px;
     }
 }
 section{

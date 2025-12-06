@@ -30,7 +30,7 @@
         {id: 2, title: "Честная смета", desc: "Сумма фиксируется до начала работ и остаётся неизменной.", icon: cardSecurity},
         {id: 3, title: "Отчётность", desc: "Регулярные фото- и видеообновления, чтобы вы видели каждый этап стройки.", icon: page},
         {id: 4, title: "Гарантия работ", desc: "Даём гарантию и остаёмся на связи после сдачи дома.", icon: security},
-        {id: 5, title: "Надёжные  материалы", desc: "Используем только проверенные и качественные материалы.", icon: angleToll},
+        {id: 5, title: "Надёжные  материалы", desc: "Используем проверенные и качественные материалы.", icon: angleToll},
     ];
 
     // Смена цветов от мобильного к десктопу
@@ -53,7 +53,7 @@
     );
 
     onMount(async ()=>{
-         await initAboutSection({section, cards: cardElements, btn});
+        await initAboutSection({section, cards: cardElements, btn});
     });
 
 </script>

@@ -62,7 +62,8 @@
         <input placeholder="Ваше сообщение" bind:value={message}>
         <Button text="Отправить" type="button" className="h-11.5! text-base! md:h-12.5! lg:h-13! xl:h-14! 2xl:h-15!" />
         <p class="font-manrope text-xs font-medium text-center mt-4.5 text-gray md:text-sm md:leading-4.5 2xl:text-base 2xl:max-w-[440px] 2xl:mt-6">
-            Отправляя форму, вы соглашаетесь с обработкой данных и политикой конфиденциальности.
+            Отправляя форму, вы соглашаетесь с обработкой данных и
+            <a href="/privacy" class="underline">политикой конфиденциальности</a>.
         </p>
     </form>
 
