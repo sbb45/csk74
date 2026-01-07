@@ -290,7 +290,7 @@
                             и предложим понятный план без навязчивых продаж.
                         </p>
                         <a
-                                href="/contacts"
+                                href="/"
                                 class="mt-4 inline-flex items-center justify-center rounded-full bg-[#F05A28] px-6 py-3 font-bounded text-sm md:text-base text-white transition-transform duration-300 hover:-translate-y-0.5"
                         >
                             Обсудить проект

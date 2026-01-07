@@ -2,7 +2,15 @@
     import {onDestroy, onMount} from "svelte";
 
     import Button from "$lib/components/ui/Button.svelte";
-    import img1 from "$lib/images/portfolio/home1/main.png";
+    import img1 from "$lib/images/portfolio/01.png";
+    import img2 from "$lib/images/portfolio/02.png";
+    import img3 from "$lib/images/portfolio/03.png";
+    import img4 from "$lib/images/portfolio/04.png";
+    import img5 from "$lib/images/portfolio/05.png";
+    import img6 from "$lib/images/portfolio/06.png";
+    import img7 from "$lib/images/portfolio/07.png";
+    import img8 from "$lib/images/portfolio/08.png";
+    import img9 from "$lib/images/portfolio/09.png";
     import {initPortfolioScroll} from "$lib/gsap/portfolioScroll";
 
     interface Image {
@@ -12,17 +20,17 @@
     }
 
     const allImages: Image[] = [
-        {id: 0, src: img1, size: "big"},
+        {id: 0, src: img8, size: "big"},
         {id: 1, src: img1, size: "small"},
-        {id: 2, src: img1, size: "big"},
-        {id: 3, src: img1, size: "small"},
-        {id: 4, src: img1, size: "big"},
-        {id: 5, src: img1, size: "small"},
-        {id: 6, src: img1, size: "big"},
-        {id: 7, src: img1, size: "small"},
-        {id: 8, src: img1, size: "big"},
-        {id: 9, src: img1, size: "small"},
-        {id: 10, src: img1, size: "big"},
+        {id: 2, src: img2, size: "big"},
+        {id: 3, src: img3, size: "small"},
+        {id: 4, src: img4, size: "big"},
+        {id: 5, src: img5, size: "small"},
+        {id: 6, src: img6, size: "big"},
+        {id: 7, src: img7, size: "small"},
+        {id: 8, src: img8, size: "big"},
+        {id: 9, src: img9, size: "small"},
+        {id: 10, src: img2, size: "big"},
         {id: 11, src: img1, size: "small"},
     ];
 
@@ -57,7 +65,7 @@
         md:grid-cols-3 md:max-h-200
         lg:px-8 lg:max-h-280
         xl:max-w-[1200px] xl:gap-x-4 xl:max-h-320 xl:mx-auto xl:mt-10
-        2xl:max-w-[1414px] 2xl:gap-x-6 2xl:max-h-380
+        2xl:max-w-[1414px] 2xl:gap-x-6 2xl:max-h-420
         3xl:max-w-[1700px]!
     ">
         <div class="flex flex-col gap-2 xl:gap-4 2xl:gap-6"
@@ -101,7 +109,7 @@
     </div>
 
     <div class="px-4">
-        <Button text="Посмотреть все работы" href="/" className="mt-7 md:mx-auto md:max-w-96 2xl:max-w-108 2xl:mt-10" />
+        <Button text="Посмотреть все работы" href="/portfolio" className="mt-7 md:mx-auto md:max-w-96 2xl:max-w-108 2xl:mt-10" />
     </div>
 </section>
 

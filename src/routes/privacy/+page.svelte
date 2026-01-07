@@ -11,7 +11,7 @@
             lg:text-xl lg:leading-8 lg:mb-8
             2xl:text-2xl 2xl:leading-9 2xl:mb-10
         ">
-            для сайта [домен сайта]
+            для сайта <a href="https://csk74.ru" class="text-blue-600">https://csk74.ru</a>
         </p>
 
         <div class="privacy-content font-manrope font-normal text-gray text-base leading-7
@@ -37,7 +37,7 @@
                     <strong>1.3.</strong> Оператором персональных данных (далее — «Оператор») является:
                 </p>
                 <ul class="list-disc list-inside ml-4 mb-4 md:mb-5 lg:mb-6 space-y-2">
-                    <li>[полное наименование юрлица / ИП] «sha&vi»,</li>
+                    <li>[полное наименование юрлица / ИП] «ЦЕНТР СИЛОВОГО КАРКАСА»,</li>
                     <li>ОГРН/ОГРНИП: [значение],</li>
                     <li>ИНН: [значение],</li>
                     <li>юридический адрес: [адрес],</li>
@@ -318,13 +318,6 @@
                 ">
                     Дата размещения Политики: «_» __________ 20 г.
                 </p>
-                <p class="font-manrope font-normal text-gray text-sm mt-2
-                    md:text-base
-                    lg:text-lg
-                    2xl:text-xl
-                ">
-                    Версия: 1.0
-                </p>
             </div>
         </div>
     </section>
@@ -346,6 +339,9 @@
         color: #202020;
     }
 </style>
+
+
+
 
 
 

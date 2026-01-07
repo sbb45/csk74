@@ -1,24 +1,6 @@
 <script lang="ts">
-    import img1 from "$lib/images/portfolio/home1/main.png";
-
-    interface Project {
-        id: number;
-        title: string;
-        image: string;
-        date: string;
-        slug: string;
-        type?: string;
-        location?: string;
-        area?: number;
-        shortDesc?: string;
-    }
-
-
-    const projects: Project[] = [
-        {id: 0, image: img1, title: "Большой дом", date: "Июль 2024", slug:"dom-v-borovom", type: "дом под ключ", area: 120, shortDesc: "Каркасный дом для постоянного проживания семьи..."},
-        {id: 1, image: img1, title: "Дургой дом", date: "Июль 2024", slug:"dom-v-sosnovke", type: "дом под ключ", area: 120, shortDesc: "Каркасный дом для постоянного проживания семьи..."},
-        {id: 2, image: img1, title: "Большой дом", date: "Июль 2024", slug:"dom-v-borovom", type: "дом под ключ", area: 120, shortDesc: "Каркасный дом для постоянного проживания семьи..."},
-    ];
+    export let data;
+    const projects = data.projects || [];
 </script>
 
 <svelte:head>

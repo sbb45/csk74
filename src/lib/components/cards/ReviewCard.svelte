@@ -1,5 +1,5 @@
 <script lang="ts">
-    import img1 from "$lib/images/portfolio/home1/main.png";
+    import img1 from "$lib/images/portfolio/01.png";
     export let id: number = 1;
     export let image: string = img1;
     export let name: string = "Алексей Морозов";

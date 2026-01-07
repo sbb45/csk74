@@ -8,6 +8,7 @@
     import ServiceCard from "$lib/components/cards/ServiceCard.svelte";
     import {onDestroy, onMount} from "svelte";
     import {titleScroll} from "$lib/gsap/main-page/service";
+    import {navigateToHash} from "$lib/gsap/scrollTo";
 
     interface Card {
         id: number;
@@ -89,7 +90,12 @@
                 ">
                     И это далеко не всё, что мы делаем на объекте.
                 </h4>
-                <Button text="Связаться" href="/about" />
+                <button onclick={() => navigateToHash("#contacts")}>
+                    <Button
+                            text="Связаться"
+                            type="button"
+                    />
+                </button>
             </div>
         </div>
     </div>

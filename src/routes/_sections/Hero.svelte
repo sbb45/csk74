@@ -3,6 +3,7 @@
     import Button from "$lib/components/ui/Button.svelte";
     import {initHeroReveal} from "$lib/gsap/main-page/hero";
     import {onMount} from "svelte";
+    import {navigateToHash} from "$lib/gsap/scrollTo";
 
     let heroSection: HTMLElement;
     let heroImg: HTMLImageElement;
@@ -54,12 +55,16 @@
         ">
             Строим под ключ с гарантией, честной сметой и контролем на каждом этапе.
         </p>
-        <span bind:this={btn} class="lg:absolute lg:top-18 lg:right-8 xl:top-23 xl:right-10 2xl:top-33 w-400 hidden md:flex lg:max-w-[280px] 2xl:max-w-[300px] 3xl:max-w-[340px]!">
+        <button
+            onclick={() => navigateToHash("#contacts")}
+            bind:this={btn}
+            class="lg:absolute lg:top-18 lg:right-8 xl:top-23 xl:right-10 2xl:top-33 w-400 hidden md:flex lg:max-w-[280px] 2xl:max-w-[300px] 3xl:max-w-[340px]!"
+        >
             <Button
                     text="Оставить заявку"
-                    href="/about"
+                    type="button"
             />
-        </span>
+        </button>
     </div>
     <div class="block relative -z-1 my-6 md:mt-10 lg:mt-16 xl:mt-12 2xl:mt-11">
         <picture>

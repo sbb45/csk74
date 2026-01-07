@@ -79,7 +79,7 @@
         <span bind:this={btn}>
             <Button
                     text="Подробнее о нас"
-                    href="/"
+                    href="/about"
                     className="mt-57.5 w-70! 2xl:mt-72 2xl:w-74! 3xl:min-w-84"
             />
         </span>

@@ -4,7 +4,8 @@
 
     export let text: string = "Связаться";
     export let href: string = "#";
-    export let type: "button" | "link" = "link";
+    export let type: "button" | "link" | "submit" = "link";
+    export let dop: string = "";
     export let className: string = "";
 
     let btn: HTMLElement;
@@ -19,9 +20,15 @@
 
 <svelte:element
         bind:this={btn}
-        this={type === "button" ? "button" : "a"}
-        type={type === "button" ? "submit" : undefined}
-        href={type !== "button" ? href : undefined}
+        this={type === "button" || dop === "submit" ? "button" : "a"}
+        href={type === "link" && dop !== "submit" ? href : undefined}
+        type={
+            dop === "submit"
+              ? "submit"
+              : type === "button"
+              ? "button"
+              : undefined
+          }
         class={`group flex justify-between items-center relative bg-primary text-primary w-full h-12.5 rounded-full p-1 2xl:h-14 ${className}`}
 >
     <p

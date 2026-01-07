@@ -41,7 +41,9 @@
 <header bind:this={header} class="fixed -top-20 left-0 right-0 bg-white py-3 2xl:max-w-[1760px] 2xl:mx-auto z-50 3xl:max-w-[2000px]!">
     <div class="flex items-center justify-between px-4 lg:px-8 xl:px-10">
         <div class="lg:w-[20%]">
-            <a href="/" class="text-2xl font-bold">Логотип</a>
+            <a href="/" class="text-2xl font-bold ">
+                <img src="/logo.svg" alt="Логотип" class="max-h-12">
+            </a>
         </div>
         <ul bind:this={navLinks} class="hidden justify-center items-center gap-4 md:flex xl:gap-6 3xl:gap-10!">
             <li>
@@ -49,7 +51,7 @@
                         type="button"
                         onclick={() => navigateToPath('/about')}
                 >
-                    Портфолио
+                    О нас
                 </button>
             </li>
             <li>

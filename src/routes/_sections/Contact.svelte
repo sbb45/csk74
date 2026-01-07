@@ -6,11 +6,54 @@
     let name = "";
     let phone = "";
     let message = "";
+    let isSubmitting = false;
+    let error = "";
+    let success = "";
 
-    function handleSubmit(){
-        name = "";
-        phone = "";
-        message = "";
+    async function handleSubmit() {
+        alert("greg")
+        error = "";
+        success = "";
+
+        const trimmedName = name.trim();
+        const trimmedPhone = phone.trim();
+        const trimmedMessage = message.trim();
+
+        if (!trimmedName || !trimmedPhone) {
+            error = "Пожалуйста, заполните имя и телефон.";
+            return;
+        }
+
+        isSubmitting = true;
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: trimmedName,
+                    phone: trimmedPhone,
+                    message: trimmedMessage,
+                }),
+            });
+
+            const data = await res.json().catch(() => ({}));
+
+            if (!res.ok || !data.ok) {
+                error = data.error || "Не удалось отправить заявку. Попробуйте позже.";
+                return;
+            }
+
+            success = "Спасибо! Ваша заявка отправлена.";
+            name = "";
+            phone = "";
+            message = "";
+        } catch (e) {
+            error = "Ошибка сети. Попробуйте ещё раз.";
+        } finally {
+            isSubmitting = false;
+        }
     }
 
     let section: HTMLElement;
@@ -58,9 +101,20 @@
             Оставьте контакты, и мы вам<br>перезвоним в ближайшее время.
         </p>
         <input placeholder="Ваше имя" bind:value={name}>
-        <input placeholder="Номер телефона" bind:value={phone}>
+        <input placeholder="Контактные данные" bind:value={phone}>
         <input placeholder="Ваше сообщение" bind:value={message}>
-        <Button text="Отправить" type="button" className="h-11.5! text-base! md:h-12.5! lg:h-13! xl:h-14! 2xl:h-15!" />
+        <Button
+                text={isSubmitting ? "Отправляем..." : "Отправить"}
+                type="button"
+                dop="submit"
+                className="h-11.5! text-base! md:h-12.5! lg:h-13! xl:h-14! 2xl:h-15!"
+        />
+        {#if error}
+            <p class="mt-3 text-center text-xs text-red-500 md:text-sm">{error}</p>
+        {/if}
+        {#if success}
+            <p class="mt-3 text-center text-xs text-emerald-500 md:text-sm">{success}</p>
+        {/if}
         <p class="font-manrope text-xs font-medium text-center mt-4.5 text-gray md:text-sm md:leading-4.5 2xl:text-base 2xl:max-w-[440px] 2xl:mt-6">
             Отправляя форму, вы соглашаетесь с обработкой данных и
             <a href="/privacy" class="underline">политикой конфиденциальности</a>.
