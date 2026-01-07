@@ -1,6 +1,7 @@
 <script lang="ts">
     import tg from '$lib/assets/icons/social/telegram.svg'
     import whatsapp from '$lib/assets/icons/social/whatsapp.svg'
+    import {navigateToHash, navigateToPath} from "$lib/gsap/scrollTo";
 
 
 </script>
@@ -17,12 +18,54 @@
             md:grid-rows-1 md:grid-cols-3 md:grid-flow-row md:justify-start md:gap-x-2 md:max-w-[500px] md:mx-auto
             lg:my-0 lg:px-0 lg:mx-0 lg:gap-x-4 lg:gap-y-1 2xl:gap-x-8
         ">
-            <li><a href="/">О компании</a></li>
-            <li><a href="/">Контакты</a></li>
-            <li><a href="/">Портфолио</a></li>
-            <li><a href="/">Услуги</a></li>
-            <li><a href="/">Отзывы</a></li>
-            <li><a href="/">FAQ</a></li>
+            <li>
+                <button
+                        type="button"
+                        onclick={() => navigateToPath('/about')}
+                >
+                    О компании
+                </button>
+            </li>
+            <li>
+                <button
+                        type="button"
+                        onclick={() => {navigateToHash('#contacts')}}
+                >
+                    Контакты
+                </button>
+            </li>
+            <li>
+                <button
+                        type="button"
+                        onclick={() => {navigateToPath('/portfolio')}}
+                >
+                    Портфолио
+                </button>
+            </li>
+            <li>
+                <button
+                        type="button"
+                        onclick={() => {navigateToHash('#services')}}
+                >
+                    Услуги
+                </button>
+            </li>
+            <li>
+                <button
+                        type="button"
+                        onclick={() => {navigateToHash('#reviews')}}
+                >
+                    Отзывы
+                </button>
+            </li>
+            <li>
+                <button
+                        type="button"
+                        onclick={() => {navigateToHash('#faq')}}
+                >
+                    Вопросы
+                </button>
+            </li>
         </ul>
 
 
@@ -31,8 +74,8 @@
                 +7 (919) 312-51-45
             </h4>
             <div class="flex justify-start items-center gap-x-4 md:justify-center lg:justify-end">
-                <a href="/"><img src={tg} alt="telegram"></a>
-                <a href="/"><img src={whatsapp} alt="whatsapp"></a>
+                <a href="https://t.me/csk174"><img src={tg} alt="telegram"></a>
+                <a href="https://wa.me/79193125145"><img src={whatsapp} alt="whatsapp"></a>
             </div>
         </div>
     </div>
@@ -40,7 +83,7 @@
     <div class="font-bounded text-gray text-lg text-center flex justify-center items-center border-t-2 border-t-gray mt-10 py-10 gap-1 flex-col
         lg:flex-row lg:justify-between lg:mt-0 2xl:max-w-[1760px] 2xl:mx-auto 2xl:text-xl 3xl:max-w-[2000px]!
     ">
-        <a href="mailto:support@site.ru" class="font-normal lg:order-2">support@site.ru</a>
+        <a href="mailto:support@site.ru" class="font-normal lg:order-2">csk74@yandex.ru</a>
         <a href="/privacy" class="font-light lg:order-1">Политика конфиденциальности</a>
     </div>
 </footer>
@@ -50,7 +93,8 @@
         position: relative;
         background-color: #202020;
         z-index: 3;
-        li a{
+        li button{
+            cursor: pointer;
             font-family: "Manrope", sans-serif;
             color: #F3F1EF;
             font-size: 20px;
@@ -105,7 +149,7 @@
         .contacts{width: auto}
     }
     @media (min-width: 1513px) {
-        footer li a{
+        footer li button{
             font-size: 24px;
         }
         footer::before{left: 70%}

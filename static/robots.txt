@@ -4,4 +4,4 @@ Allow: /
 Disallow: /privacy
 
 
-Sitemap: https://ТВОЙ-ДОМЕН/sitemap.xml
+Sitemap: https://csk74.ru/sitemap.xml

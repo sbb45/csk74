@@ -86,7 +86,7 @@
         </div>
 
         <div class="hidden lg:block">
-            <h3><a href="mailto:support@site.ru" class="contact text mb-1.5">support@site.ru</a></h3>
+            <h3><a href="mailto:csk74@yandex.ru" class="contact text mb-1.5">csk74@yandex.ru</a></h3>
             <h3><a href="tel:+79193125145" class="contact text">+7 (919) 312-51-45</a></h3>
         </div>
     </div>
