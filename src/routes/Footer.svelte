@@ -70,9 +70,9 @@
 
 
         <div class="contacts">
-            <h4 class="font-bounded font-normal text-2xl text-white mb-3 md:text-center lg:mb-1 2xl:text-3xl">
+            <a href="tel:+79193125145" class="font-bounded font-normal text-2xl text-white mb-3 md:text-center lg:mb-1 2xl:text-3xl">
                 +7 (919) 312-51-45
-            </h4>
+            </a>
             <div class="flex justify-start items-center gap-x-4 md:justify-center lg:justify-end">
                 <a href="https://t.me/csk174"><img src={tg} alt="telegram"></a>
                 <a href="https://wa.me/79193125145"><img src={whatsapp} alt="whatsapp"></a>

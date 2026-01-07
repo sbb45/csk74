@@ -124,7 +124,7 @@
     <h3 class="lg:hidden"><a href="mailto:support@site.ru" class="contact mb-1.5">support@site.ru</a></h3>
     <h3 class="lg:hidden"><a href="tel:+79193125145" class="contact">+7 (919) 312-51-45</a></h3>
 
-    <span class="none rounded-3xl xl:block cutting"></span>
+    <span class="hidden rounded-3xl xl:block cutting"></span>
 </section>
 
 <style>
