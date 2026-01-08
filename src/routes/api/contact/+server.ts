@@ -1,6 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit'
 
-const ADMIN_GRAPHQL_URL ='http://localhost:3000/api/graphql'
+const ADMIN_GRAPHQL_URL ='http://localhost:4000/api/graphql'
 
 export const POST: RequestHandler = async ({ request }) => {
   try {

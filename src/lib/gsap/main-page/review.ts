@@ -33,10 +33,10 @@ export async function initReview(section: HTMLElement){
         opacity: 0,
         rotateX: -8,
         transformOrigin: "center top",
-        duration: 0.7,
+        duration: 0.6,
         ease: "power3.out",
         stagger: 0.12,
-    });
+    }, 0.1);
 
 
 }

@@ -11,7 +11,6 @@
     let success = "";
 
     async function handleSubmit() {
-        alert("greg")
         error = "";
         success = "";
 
@@ -100,8 +99,8 @@
         <p class="font-manrope text-[16px] leading-5 font-medium text-center mb-6 text-black md:text-xl md:leading-6 2xl:text-[22px]">
             Оставьте контакты, и мы вам<br>перезвоним в ближайшее время.
         </p>
-        <input placeholder="Ваше имя" bind:value={name}>
-        <input placeholder="Контактные данные" bind:value={phone}>
+        <input placeholder="Ваше имя" bind:value={name} autocomplete="name">
+        <input placeholder="Контактные данные" bind:value={phone} autocomplete="tel">
         <input placeholder="Ваше сообщение" bind:value={message}>
         <Button
                 text={isSubmitting ? "Отправляем..." : "Отправить"}
