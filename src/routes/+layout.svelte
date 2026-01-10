@@ -2,12 +2,12 @@
     import './layout.css';
     import Header from "./Header.svelte";
     import Footer from "./Footer.svelte";
-    import {onMount} from "svelte";
-    import {isLarge} from "$lib/stores/breakpoint";
-    import {loadGSAP} from "$lib/gsap";
-    import {get} from "svelte/store";
-    import {scrollWhenReady, setSmootherReady} from "$lib/gsap/scrollTo";
-    import {afterNavigate} from "$app/navigation";
+    import { onMount, onDestroy } from "svelte";
+    import { isLarge } from "$lib/stores/breakpoint";
+    import { loadGSAP } from "$lib/gsap";
+    import { get } from "svelte/store";
+    import { scrollWhenReady, setSmootherReady } from "$lib/gsap/scrollTo";
+    import { afterNavigate } from "$app/navigation";
 
     let { children, data } = $props();
 
@@ -31,10 +31,23 @@
         },
         description: siteConfig.description
     };
+    
+    const lockScroll = () => {
+        document.documentElement.classList.add("lock-scroll");
+        document.body.classList.add("lock-scroll");
+    };
 
-    // Проверка ширины экрана
-    onMount(()=>{
-        function update(){
+    const unlockScroll = () => {
+        document.documentElement.classList.remove("lock-scroll");
+        document.body.classList.remove("lock-scroll");
+    };
+
+    let smoother: any = null;
+    let ScrollTriggerRef: any = null;
+    let ScrollSmootherRef: any = null;
+
+    onMount(() => {
+        function update() {
             isLarge.set(window.innerWidth > 768);
         }
         update();
@@ -42,45 +55,89 @@
         return () => window.removeEventListener("resize", update);
     });
 
-    // Запрещаем скрол пока не загрузился сайт
-    onMount(() => {
-        document.documentElement.classList.add("lock-scroll");
-        document.body.classList.add("lock-scroll");
-    });
-
-    // Плавная прокрутка
     onMount(async () => {
-        const { ScrollSmoother } = await loadGSAP();
-        if (!ScrollSmoother) return;
-
-        ScrollSmoother.create({
-            wrapper: "#smooth-wrapper",
-            content: "#smooth-content",
-            smooth: 1.2,
-            effects: true,
-            normalizeScroll: true,
-            smoothTouch: 0.1,
-            speed: get(isLarge) ? 0.7 : 1
-        });
-
-        setTimeout(() => {
+        const lockScroll = () => {
+            document.documentElement.classList.add("lock-scroll");
+            document.body.classList.add("lock-scroll");
+        };
+        const unlockScroll = () => {
             document.documentElement.classList.remove("lock-scroll");
             document.body.classList.remove("lock-scroll");
+        };
+
+        lockScroll();
+
+        const ready = () => {
+            unlockScroll();
             setSmootherReady();
-        }, 100);
+        };
+
+        try {
+            const { gsap, ScrollTrigger, ScrollSmoother } = await loadGSAP();
+            if (!gsap || !ScrollTrigger || !ScrollSmoother) {
+                document.documentElement.classList.add("smoother-off");
+                ready();
+                return;
+            }
+
+            const prefersReducedMotion =
+                window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+            const isCoarsePointer =
+                window.matchMedia?.("(hover: none) and (pointer: coarse)")?.matches ?? false;
+            const isTouchOnly = ScrollTrigger.isTouch === 1;
+
+            const disableSmoother = prefersReducedMotion || isCoarsePointer || isTouchOnly;
+
+            if (disableSmoother) {
+                document.documentElement.classList.add("smoother-off");
+
+                ScrollSmoother.get()?.kill?.();
+                gsap.set(["#smooth-wrapper", "#smooth-content"], { clearProps: "all" });
+
+                ready();
+                return;
+            }
+
+            document.documentElement.classList.remove("smoother-off");
+
+            ScrollSmoother.create({
+                wrapper: "#smooth-wrapper",
+                content: "#smooth-content",
+                smooth: 1.2,
+                effects: true,
+                normalizeScroll: true,
+                speed: get(isLarge) ? 0.7 : 1
+            });
+
+            requestAnimationFrame(() => {
+                ready();
+                ScrollTrigger.refresh();
+            });
+        } catch (e) {
+            document.documentElement.classList.add("smoother-off");
+            ready();
+        }
     });
 
+
     afterNavigate((nav) => {
+        ScrollTriggerRef?.refresh?.();
+
         if (!nav?.to) return;
         const { pathname, hash } = nav.to.url;
         if (pathname === '/' && hash) {
             scrollWhenReady(hash);
         }
     });
+
+    onDestroy(() => {
+        smoother?.kill?.();
+        smoother = null;
+        ScrollSmootherRef?.get?.()?.kill?.();
+    });
 </script>
 
 <svelte:head>
-    <!-- Основное -->
     <title>{seo.title}</title>
     <meta name="description" content={seo.description} />
     <meta name="language" content={siteConfig.language} />
@@ -90,10 +147,8 @@
         <meta name="robots" content="index, follow" />
     {/if}
 
-    <!-- Canonical -->
     <link rel="canonical" href={seo.canonical} />
 
-    <!-- Open Graph -->
     <meta property="og:type" content={seo.ogType} />
     <meta property="og:title" content={seo.ogTitle} />
     <meta property="og:description" content={seo.ogDescription} />
@@ -104,7 +159,6 @@
         <meta property="og:image" content={seo.image} />
     {/if}
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={seo.ogTitle} />
     <meta name="twitter:description" content={seo.ogDescription} />
@@ -117,7 +171,6 @@
         {JSON.stringify(jsonLdLocalBusiness)}
     </script>
 </svelte:head>
-
 
 <Header />
 <div id="smooth-wrapper">

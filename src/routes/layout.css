@@ -49,6 +49,26 @@ body.lock-scroll {
     padding-bottom: 10px;
     position: relative;
 }
+
+/* когда smoother выключен (мобилка) — возвращаем нативный скролл */
+html.smoother-off,
+html.smoother-off body {
+    overflow: auto;
+    height: auto;
+}
+
+html.smoother-off #smooth-wrapper {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+html.smoother-off #smooth-content {
+    transform: none !important;
+    will-change: auto !important;
+}
+
+
 main{
     position: relative;
     z-index: 2;
