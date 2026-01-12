@@ -1,13 +1,13 @@
 export const siteConfig = {
-    name: 'sha&vi',
+    name: 'Центр Силового Каркаса',
     tagline: 'Каркасные дома под ключ в Челябинске',
-    url: 'https://example.com',
+    url: 'https://csk74.ru',
     locale: 'ru_RU',
     language: 'ru',
     phone: '+7 919 312 51 45',
-    email: 'info@example.com',
-    logo: 'https://example.com/og/logo.png',
-    defaultOgImage: 'https://example.com/og/main.jpg',
+    email: 'csk74@yandex.ru',
+    logo: 'https://csk74.ru/web-app-manifest-512x512.png',
+    defaultOgImage: 'https://csk74.ru/web-app-manifest-512x512.png',
     address: {
         country: 'RU',
         locality: 'Челябинск'
