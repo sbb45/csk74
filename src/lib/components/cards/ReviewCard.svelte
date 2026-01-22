@@ -3,7 +3,7 @@
     export let id: number = 1;
     export let image: string = img1;
     export let name: string = "Алексей Морозов";
-    export let message: string = "Строил дом с sha&vi — всё четко и прозрачно. Регулярные отчёты, без лишних доплат, сроки выдержали. Качество сборки отличное, въехали без проблем. Надёжная команда, рекомендую.";
+    export let message: string = "Всё четко и прозрачно. Регулярные отчёты, без лишних доплат, сроки выдержали. Качество сборки отличное, въехали без проблем. Надёжная команда, рекомендую.";
     export let date: string = "25.11.2025";
     export let type: "black" | undefined = undefined;
 
