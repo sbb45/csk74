@@ -68,7 +68,14 @@
     </div>
     <div class="block relative -z-1 my-6 md:mt-10 lg:mt-16 xl:mt-12 2xl:mt-11">
         <picture>
-            <img  bind:this={heroImg} src={hero} alt="Главное изображение" class="rounded-xl w-full h-[320px] object-cover lg:h-[480px] 2xl:h-[58vh] 2xl:rounded-3xl! 3xl:h-[64vh]!">
+            <img  
+                bind:this={heroImg} 
+                src={hero} 
+                alt="Каркасные дома под ключ в Челябинске от Центра Силового Каркаса" 
+                class="rounded-xl w-full h-[320px] object-cover lg:h-[480px] 2xl:h-[58vh] 2xl:rounded-3xl! 3xl:h-[64vh]!"
+                fetchpriority="high"
+                decoding="async"
+            >
         </picture>
 
         <div bind:this={maskTop} class="mask-top"></div>

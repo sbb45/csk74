@@ -35,6 +35,12 @@
         </p>
     </div>
     <div class="w-full h-66.5 overflow-hidden xl:h-76 2xl:h-90 {id === 2 || id === 3 ? 'lg:order-1' : 'lg:order-2'}">
-        <img src={image} alt="Фото объекта" class="w-full h-full object-cover">
+        <img 
+            src={image} 
+            alt={`Каркасный дом построенный Центром Силового Каркаса - отзыв от ${name}`} 
+            class="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+        >
     </div>
 </div>

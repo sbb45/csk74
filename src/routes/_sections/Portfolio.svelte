@@ -75,8 +75,10 @@
             {#each col1 as img (img.id)}
                 <img
                         src={img.src}
-                        alt="Фото объекта"
+                        alt="Каркасный дом построенный Центром Силового Каркаса в Челябинске"
                         class="rounded-xl object-cover {img.size === 'big' ? 'big-image' : 'small-image'} xl:rounded-2xl"
+                        loading="lazy"
+                        decoding="async"
                 />
             {/each}
         </div>
@@ -88,8 +90,10 @@
             {#each col2 as img (img.id)}
                 <img
                         src={img.src}
-                        alt="Фото объекта"
+                        alt="Каркасный дом построенный Центром Силового Каркаса в Челябинске"
                         class="rounded-xl object-cover {img.size === 'big' ? 'big-image' : 'small-image'} xl:rounded-2xl"
+                        loading="lazy"
+                        decoding="async"
                 />
             {/each}
         </div>
@@ -101,8 +105,10 @@
             {#each col3 as img (img.id)}
                 <img
                         src={img.src}
-                        alt="Фото объекта"
+                        alt="Каркасный дом построенный Центром Силового Каркаса в Челябинске"
                         class="rounded-xl object-cover {img.size === 'big' ? 'big-image' : 'small-image'} xl:rounded-2xl"
+                        loading="lazy"
+                        decoding="async"
                 />
             {/each}
         </div>

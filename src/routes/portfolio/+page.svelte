@@ -3,13 +3,6 @@
     const projects = data.projects || [];
 </script>
 
-<svelte:head>
-    <title>Портфолио — sha&vi</title>
-    <meta
-            name="description"
-            content="Портфолио sha&vi: реализованные проекты каркасных домов в Челябинске и области. Фото готовых домов, планировки, площади и особенности строительства."
-    />
-</svelte:head>
 
 <main class="mt-24">
     <section id="about" class="px-4 lg:px-24 xl:px-30 3xl:max-w-[2000px]!">

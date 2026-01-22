@@ -8,8 +8,11 @@
     import { get } from "svelte/store";
     import { scrollWhenReady, setSmootherReady } from "$lib/gsap/scrollTo";
     import { afterNavigate } from "$app/navigation";
+    import { page } from '$app/stores';
 
     let { children, data } = $props();
+    
+    const url = $page.url;
 
     // SEO
     const { seo, siteConfig } = data;
@@ -19,7 +22,9 @@
         name: siteConfig.name,
         url: siteConfig.url,
         telephone: siteConfig.phone,
+        email: siteConfig.email,
         image: siteConfig.logo,
+        logo: siteConfig.logo,
         address: {
             '@type': 'PostalAddress',
             addressLocality: siteConfig.address.locality,
@@ -29,7 +34,25 @@
             '@type': 'AdministrativeArea',
             name: 'Челябинск и Челябинская область'
         },
-        description: siteConfig.description
+        description: siteConfig.description,
+        priceRange: '$$',
+        openingHours: 'Mo-Su 08:00-20:00'
+    };
+    
+    const jsonLdOrganization = {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: siteConfig.name,
+        url: siteConfig.url,
+        logo: siteConfig.logo,
+        contactPoint: {
+            '@type': 'ContactPoint',
+            telephone: siteConfig.phone,
+            contactType: 'customer service',
+            areaServed: 'RU',
+            availableLanguage: 'Russian'
+        },
+        sameAs: []
     };
     
     const lockScroll = () => {
@@ -157,6 +180,11 @@
     <meta property="og:locale" content={siteConfig.locale} />
     {#if seo.image}
         <meta property="og:image" content={seo.image} />
+        <meta property="og:image:secure_url" content={seo.image} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={seo.ogTitle || seo.title} />
     {/if}
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -164,12 +192,42 @@
     <meta name="twitter:description" content={seo.ogDescription} />
     {#if seo.image}
         <meta name="twitter:image" content={seo.image} />
+        <meta name="twitter:image:alt" content={seo.ogTitle || seo.title} />
     {/if}
+    
+    <!-- Дополнительные мета-теги для SEO -->
+    <meta name="author" content={siteConfig.name} />
+    <meta name="copyright" content={siteConfig.name} />
+    <link rel="alternate" hreflang="ru" href={seo.canonical} />
 
     <!-- JSON-LD LocalBusiness -->
     <script type="application/ld+json">
         {JSON.stringify(jsonLdLocalBusiness)}
     </script>
+    
+    <!-- JSON-LD Organization -->
+    <script type="application/ld+json">
+        {JSON.stringify(jsonLdOrganization)}
+    </script>
+    
+    <!-- JSON-LD BreadcrumbList для главной -->
+    {#if url.pathname === '/'}
+    <script type="application/ld+json">
+        {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Главная',
+                    item: siteConfig.url
+                }
+            ]
+        })}
+    </script>
+    {/if}
+    
 </svelte:head>
 
 <Header />

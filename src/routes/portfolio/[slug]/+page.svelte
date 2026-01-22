@@ -3,9 +3,33 @@
     import {navigateToHash} from "$lib/gsap/scrollTo";
     import { loadGSAP } from "$lib/gsap";
     import { browser } from '$app/environment';
+    import { siteConfig } from '$lib/seo';
 
     export let data;
     const project = data.project;
+    const seo = data.seo;
+    
+    // Schema.org для проекта
+    const jsonLdArticle = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: project.title,
+        description: project.shortDesc || project.description,
+        image: `${siteConfig.url}${project.image}`,
+        datePublished: project.date ? `${project.date}-01-01` : undefined,
+        author: {
+            '@type': 'Organization',
+            name: 'Центр Силового Каркаса'
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Центр Силового Каркаса',
+            logo: {
+                '@type': 'ImageObject',
+                url: siteConfig.logo
+            }
+        }
+    };
 
     import { onMount, onDestroy, tick } from 'svelte';
 
@@ -159,9 +183,40 @@
 </script>
 
 <svelte:head>
-    <title>{project.title} — Портфолио</title>
-    <meta name="description" content={project.shortDesc || "Подробности проекта"} />
+    <!-- JSON-LD Article для проекта -->
+    <script type="application/ld+json">
+        {JSON.stringify(jsonLdArticle)}
+    </script>
+    
+    <!-- JSON-LD BreadcrumbList -->
+    <script type="application/ld+json">
+        {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Главная',
+                    item: siteConfig.url
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Портфолио',
+                    item: `${siteConfig.url}/portfolio`
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: project.title,
+                    item: `${siteConfig.url}/portfolio/${project.slug}`
+                }
+            ]
+        })}
+    </script>
 </svelte:head>
+
 
 <section class="mt-24 px-2 xl:px-32">
     <div class="relative mb-10 overflow-hidden rounded-b-xl xl:rounded-b-3xl xl:max-h-[70vh]">
@@ -169,8 +224,10 @@
             <source srcset={project.image} type="image/webp">
             <img
                     src={project.image2}
-                    alt={project.title}
+                    alt={`${project.title} - каркасный ${project.type || 'дом'} ${project.area ? `${project.area} м²` : ''} ${project.location ? `в ${project.location}` : ''}`}
                     class="aspect-[16/9] w-full object-cover h-[50vh] xl:h-auto"
+                    fetchpriority="high"
+                    decoding="async"
             />
         </picture>
 
@@ -221,10 +278,12 @@
                             <source srcset={img} type="image/webp" />
                             <img
                                     src={project.gallery2?.[i] ?? img}
-                                    alt=""
+                                    alt={`${project.title} - фото ${i + 1}`}
                                     class="gallery-image w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
                                     loading="lazy"
                                     decoding="async"
+                                    width="400"
+                                    height="300"
                             />
                         </picture>
                     </div>

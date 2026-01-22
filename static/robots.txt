@@ -2,6 +2,7 @@
 User-agent: *
 Allow: /
 Disallow: /privacy
+Disallow: /api/
 
-
+# Sitemap
 Sitemap: https://csk74.ru/sitemap.xml
