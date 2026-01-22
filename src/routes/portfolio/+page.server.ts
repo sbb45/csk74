@@ -1,12 +1,15 @@
 import { projects } from '$lib/data/projects';
 import type { SeoProps } from '$lib/seo';
 import { siteConfig } from '$lib/seo';
+import type { PageServerLoad } from './$types';
 
-export function load() {
+export const prerender = true;
+
+export const load: PageServerLoad = () => {
     const seo: SeoProps = {
         title: 'Портфолио построенных каркасных домов — Центр Силового Каркаса',
         description:
-            'Готовые каркасные дома Центр Силового Каркаса: фото реализованных проектов, планировки и отделка. Посмотрите, как мы строим.',
+            'Готовые каркасные дома Центра Силового Каркаса: фото реализованных проектов, планировки и отделка. Посмотрите, как мы строим в Челябинске и области.',
         ogType: 'website',
         image: siteConfig.defaultOgImage
     };
@@ -15,6 +18,6 @@ export function load() {
         projects,
         seo
     };
-}
+};
 
 

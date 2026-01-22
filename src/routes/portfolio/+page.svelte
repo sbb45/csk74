@@ -1,6 +1,8 @@
 <script lang="ts">
-    export let data;
-    const projects = data.projects || [];
+    import type { PageData } from './$types';
+    
+    export let data: PageData;
+    const projects = data?.projects || [];
 </script>
 
 

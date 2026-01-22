@@ -3,6 +3,15 @@ import { error } from '@sveltejs/kit';
 import type { SeoProps } from '$lib/seo';
 import { siteConfig } from '$lib/seo';
 
+export const prerender = true;
+
+// Указываем SvelteKit, какие страницы нужно пререндерить
+export async function entries() {
+    return projects.map(project => ({
+        slug: project.slug
+    }));
+}
+
 export function load({ params, url }) {
     const project = projects.find(p => p.slug === params.slug);
 
