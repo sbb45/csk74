@@ -170,7 +170,7 @@
         <meta name="robots" content="index, follow" />
     {/if}
 
-    <link rel="canonical" href={seo.canonical} />
+    <link rel="canonical" href="https://csk74.ru" />
 
     <meta property="og:type" content={seo.ogType} />
     <meta property="og:title" content={seo.ogTitle} />
@@ -198,7 +198,7 @@
     <!-- Дополнительные мета-теги для SEO -->
     <meta name="author" content={siteConfig.name} />
     <meta name="copyright" content={siteConfig.name} />
-    <link rel="alternate" hreflang="ru" href={seo.canonical} />
+    <link rel="alternate" hreflang="ru" href="https://csk74.ru" />
 
     <!-- JSON-LD LocalBusiness -->
     <script type="application/ld+json">

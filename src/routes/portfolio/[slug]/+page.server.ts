@@ -20,7 +20,7 @@ export function load({ params, url }) {
     const seo: SeoProps = {
         title: `${project.title} — Портфолио Центра Силового Каркаса`,
         description: project.shortDesc || `Каркасный ${project.type || 'дом'} ${project.area ? `${project.area} м²` : ''} ${project.location ? `в ${project.location}` : ''}. ${project.description || ''}`,
-        canonical: url.href,
+        canonical: "https://csk74.ru",
         ogType: 'article',
         image: `${siteConfig.url}${project.image}`,
         ogTitle: project.title,

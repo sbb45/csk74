@@ -5,6 +5,7 @@ export const prerender = true;
 
 export const load: LayoutLoad = ({ url, data }) => {
     const childSeo = (data as any)?.seo as SeoProps | undefined;
+    const base = siteConfig.url.replace(/\/+$/, '');
     
     // Нормализуем canonical URL (убираем trailing slash, кроме корня)
     const normalizeCanonical = (href: string): string => {
@@ -16,14 +17,15 @@ export const load: LayoutLoad = ({ url, data }) => {
         urlObj.hash = ''; // Убираем hash из canonical
         return urlObj.href;
     };
+    const canonical = normalizeCanonical(new URL(url.pathname, base + '/').href);
 
     const mergedSeo: SeoProps = {
         title:
             childSeo?.title ??
             `${siteConfig.tagline} — ${siteConfig.name}`,
         description: childSeo?.description ?? siteConfig.description,
-        url: url.href,
-        canonical: childSeo?.canonical ? normalizeCanonical(childSeo.canonical) : normalizeCanonical(url.href),
+        url: "https://csk74.ru",
+        canonical: "https://csk74.ru",
         noindex: childSeo?.noindex ?? false,
         ogType: childSeo?.ogType ?? 'website',
         ogTitle:
